@@ -1,0 +1,106 @@
+﻿@{
+    ViewData["Title"] = "فاکتور";
+}
+
+@model List<TarefeModel>
+
+
+@section NavItem{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="bill">فاکتور</a>
+    </li>
+}
+
+
+
+<form style=" text-align:center; background-color:gainsboro" >
+    <header>
+    </header>
+
+
+    <body>
+
+        <div class="row  text-center">
+            <div class="g-col-1">.g-col-4</div>
+            <div class="g-col-2">.g-col-4</div>
+            <div class="g-col-3">.g-col-4</div>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Handle</th>
+                </tr>
+            </thead>
+            
+        </table>
+
+                    @foreach (var dyn743 in Model)
+                    {
+                            @if (dyn743.Selected == true)
+                            {
+                                
+
+                            <table class="table">
+                                
+                                <tbody>
+                                    <tr>
+                                        
+                                        <td>@dyn743.TarefeTitle</td>
+                                        <td>@dyn743.TarefeId</td>
+                                        <td>@dyn743.TarefePrice</td>
+                                    </tr>
+                                  
+                                </tbody>
+                            </table>
+                            }
+
+                        
+                    }
+
+
+        <style>
+            .g-col-1 {
+                box-sizing: border-box;
+                
+                width: 400px;
+                height: 141px;
+                background: #FFD600;
+                border-radius: 17px;
+                margin:20px;
+            }
+
+            .g-col-2 {
+                box-sizing: border-box;
+                width: 200px;
+                height: 141px;
+                background: #FFffff;
+                border-radius: 17px;
+                margin: 20px;
+            }
+
+            .g-col-3 {
+                box-sizing: border-box;
+                width: 200px;
+                height: 141px;
+                background: #FFffff;
+                border-radius: 17px;
+                margin: 20px;
+            }
+
+
+        </style>
+    </body>
+
+    <footer>
+    </footer>
+
+
+
+</form>
+
+
+
+

@@ -1,0 +1,211 @@
+﻿@{
+    ViewData["Title"] = "تعرفه";
+}
+
+@model List<TarefeModel>
+
+
+<div style="height: 12vh;left:0px;margin-top:-15px;background: linear-gradient(180deg, rgba(186, 103, 207, 0.23) 0%, rgba(223, 148, 241, 0) 100%);" class="text-center">
+    <h1>This is test</h1>
+</div>
+
+
+
+
+
+
+
+<div style="direction:rtl;" class="text-md-right">
+
+
+    @foreach (var dyn979 in Model)
+    {
+
+        @if (dyn979.service_id != -1)
+        {
+            <div class="row">
+
+                <div style="height:10vh;width:20vh; background: linear-gradient(90deg, #FF8900 23.23%, #FE4D01 100%);text-align:center; margin-bottom:2vh; margin-left:2vh;">@dyn979.service_name </div>
+
+                @foreach (var dyn743 in Model)
+                {
+                    @if (dyn743.service_id == -1)
+                    {
+                        @if (dyn743.khedmatId == dyn979.service_id)
+                        {
+                            <button id=@dyn743.TarefeId onclick="" value=@dyn743.TarefePrice style="border:none;background: linear-gradient(90deg,#FFFFFF 0%, rgba(219, 214, 214, 0.64)  100%);height:10vh;width:20vh;text-align:center; margin-left:2vh;">@dyn743.TarefeTitle @dyn743.TarefeId @dyn743.TarefePrice </button>
+                        }
+
+                    }
+
+                }
+            </div>
+        }
+    }
+
+
+
+    <table>
+
+        <tr>
+
+            <td>
+                <h5> مجموع مبلغ: </h5>
+            </td>
+            <td>
+                <p>&emsp;</p>
+            </td>
+            <td>
+                <h5 id="total"> 0 </h5>
+            </td>
+            <td>
+                <p>&emsp; &emsp; &emsp; &emsp;</p>
+            </td>
+            <td>
+                <form method="post" asp-controller="home" asp-action="bill" method="post">
+                    @*</input><td>@Html.ActionLink("Home", "SendToFactor", new { TarefeId = 1 })</td>*@
+                    <input type="submit" name="test" value="تایید نهایی" id="save"> 
+                </form>
+            </td>
+            <td>
+                <p>&emsp; &emsp; &emsp; &emsp;</p>
+            </td>
+            <td>
+                <form method="post" asp-controller="home" asp-action="ClearAllBtn" method="post">
+                    <input type="submit" name="test" value="حذف همه" id="deleteAll"> 
+                </form>
+            </td>
+
+        </tr>
+
+    </table>
+    <br />
+    <p>تعرفه های انتخاب شده:</p>
+    <hr />
+    <br />
+
+
+
+
+
+
+
+
+    <div id="selection" style="direction:rtl;" class="text-md-right"></div>
+
+
+
+
+
+    @foreach (var dyn743 in Model)
+    {
+        @*@if (dyn743.service_id == -1)
+    {*@
+        if (dyn743.Selected == true)
+        {
+            int n = 0;
+            <button id="Selected" onclick="" value=@dyn743.TarefePrice style="border:none;background: linear-gradient(90deg,#FFFFFF 0%, rgba(219, 214, 214, 0.64)  100%);height:10vh;width:20vh;text-align:center; margin-left:2vh;">@dyn743.TarefeTitle @dyn743.TarefeId @dyn743.TarefePrice </button>
+
+        }
+
+        @*}*@
+
+    }
+
+
+
+    @section NavItem{
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="tariff">تعرفه</a>
+        </li>
+    }
+
+
+    @*****************************************jQuery *****************************************@
+</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+
+
+
+        $(document).ready(function () {
+            $("button").click(function () {
+                //alert("clicked: "+ (this).value);
+
+
+                // alert("click:");
+                //$("input").write()
+                //$("input").hide()
+                // $(document).weite((this).id);
+
+                console.log("btn id:" + (this).id + " value :" + (this.value));
+
+                if (this.id != "Selected") {
+
+                    $.ajax({
+
+                        type: "POST", //HTTP POST Method
+                        url: "Home/SelectBtn", // Controller/method
+                        data: { //Passing data
+                            TarefeId: (this).id //$("#txtName").val() //Reading text box values using Jquery
+                        }, success: function (data) { location.reload(); }
+                    });
+
+
+                }
+
+                //MakeBtn((this).id, (this).value);
+
+            });
+
+            Calculate();
+
+        });
+
+
+
+        function Calculate() {
+
+            var totalPrice = 0;
+
+            $("#total").text("0");
+
+            $("button").each(function (index, value) {
+
+                if ((this.id) == "Selected") {
+
+                    console.log(`div${index}: ${(this.id).substring(0, 1)} : ${this.value}`);
+
+                    totalPrice = totalPrice + parseFloat(this.value);
+
+                    $("#total").text(totalPrice);
+
+                }
+            });
+
+        }
+
+
+
+                //function MakeBtn(txtId, txtPrice ) {
+
+                //    $( "<button id=S" +txtId+ " value= "+txtPrice+" style='border:none;background: linear-gradient(90deg,#FFFFFF 0%, rgba(219, 214, 214, 0.64)  100%);height:10vh;width:20vh;text-align:center; margin-left:2vh;'>"+txtId+" " + txtPrice +" </button>").appendTo( "#selection" );
+
+                //}
+
+
+                //function GetMessage() {
+
+
+                ////$.get("/Home/GetMessage", function (data) {
+
+                ////    $("#hi").html(data);
+                ////    });
+
+                //}
+
+
+
+    </script>
+
+
