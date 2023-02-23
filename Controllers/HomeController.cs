@@ -11,6 +11,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Http.Extensions;
 using System.Data.SqlClient;
 using System.Data;
+using System.Dynamic;
 
 namespace gym.Controllers
 {
@@ -19,8 +20,25 @@ namespace gym.Controllers
 
         private readonly ILogger<HomeController> _logger;
         public static List<TarefeModel> tarefeModel = new List<TarefeModel>();
+        public static Int64 persenId;
+        public static PersonModel personInfo;
+
+        public static dynamic mymodel = new ExpandoObject();
+        public static bool firstRun;
+
+        public void init()
+        {
+
+            persenId = 1037007310000000103;
+
+            tarefeModel = TarefeModel.GetList();
+            personInfo = PersonModel.GetInfo(persenId);
+
+            mymodel.tarefeList = tarefeModel;
+            mymodel.personInfo = personInfo;
 
 
+        }
 
         public HomeController(ILogger<HomeController> logger)
         {
@@ -31,28 +49,41 @@ namespace gym.Controllers
         public IActionResult Index()
         {
 
-            tarefeModel = TarefeModel.GetList();
+            init();
 
             return RedirectToAction("tariff");
+            //return View("tariff",mymodel);
         }
         public IActionResult tariff()
         {
 
 
-            return View(tarefeModel);
+
+            //mymodel = new ExpandoObject();
+
+
+
+            
+
+            return View(mymodel);
 
         }
         public IActionResult bill()
         {
 
 
-            return View(tarefeModel);
+            return View(mymodel);
 
         }
-
-        public IActionResult SelectBtn(TarefeModel model)
+        [HttpPost]
+        public IActionResult SelectBtn()
         {
-            Int64 id = model.TarefeId;
+
+            //Int64 id = model.TarefeId;
+
+            Int64 id = Convert.ToInt64(Request.Form["BtnId"].ToString());
+
+            //TarefeModel mm = mymodel.tarefeList;
 
             FlagBtn(id);
 
@@ -72,6 +103,36 @@ namespace gym.Controllers
 
 
 
+        public void FlagBtn(Int64 id)
+        {
+
+            foreach (var model in mymodel.tarefeList)
+            {
+                if (model.TarefeId == id)
+                    model.Selected = true;
+
+            }
+
+        }
+
+        private void ClearAllFlags()
+        {
+            foreach (var model in mymodel.tarefeList)
+            {
+                model.Selected = false;
+
+            }
+        }
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -84,28 +145,6 @@ namespace gym.Controllers
 
         }
 
-
-
-        private void FlagBtn(Int64 id)
-        {
-
-            foreach (var model in tarefeModel)
-            {
-                if (model.TarefeId == id)
-                    model.Selected = true;
-
-            }
-
-        }
-
-        private void ClearAllFlags()
-        {
-            foreach (var model in tarefeModel)
-            {
-                model.Selected = false;
-
-            }
-        }
 
     }
 }

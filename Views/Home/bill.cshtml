@@ -2,7 +2,7 @@
     ViewData["Title"] = "فاکتور";
 }
 
-@model List<TarefeModel>
+@model dynamic
 
 
 @section NavItem{
@@ -13,59 +13,87 @@
 
 
 
-<form style=" text-align:center; background-color:gainsboro" >
+<form style="padding:0px 10px 10px 10px; direction:rtl; text-align:center; background-color:gainsboro">
     <header>
+         <div style="direction:rtl;" class="text-md-right">
+            @{
+                var person = Model.personInfo;
+                    <p> نام و نام خانوادگی :@person.PersonName </p>
+            }
+        </div>
+
     </header>
 
 
     <body>
 
         <div class="row  text-center">
-            <div class="g-col-1">.g-col-4</div>
-            <div class="g-col-2">.g-col-4</div>
-            <div class="g-col-3">.g-col-4</div>
+            <div class="g-col-1">
+                <table>
+
+                    <tr>
+
+                        <td>
+                            <h5> مجموع مبلغ: </h5>
+                        </td>
+                        <td>
+                            <p>&emsp;</p>
+                        </td>
+                        <td>
+                            <h5 id="total"> 0 </h5>
+                        </td>
+                        <td>
+                            <p>&emsp; &emsp; &emsp; &emsp;</p>
+                        </td>
+                       
+                    </tr>
+
+                </table>
+            </div>
+            <div class="g-col-2">.g-col-2</div>
         </div>
-        <table class="table">
+        <table style=" border-radius: 17px;text-align:justify; background-color:white;height:5vh; width:100%;" class="table">
             <thead>
                 <tr>
-                    
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
+                    <th style="height:5vh; width:6vh;" scope="col">First</th>
+                    <th style="height:5vh; width:28vh;" scope="col">First</th>
+                    <th style="height:5vh; width:28vh;" scope="col">Last</th>
+                    <th style="height:5vh; width:28vh;" scope="col">Handle</th>
                 </tr>
             </thead>
             
         </table>
 
-                    @foreach (var dyn743 in Model)
-                    {
-                            @if (dyn743.Selected == true)
-                            {
-                                
-
-                            <table class="table">
-                                
-                                <tbody>
-                                    <tr>
-                                        
-                                        <td>@dyn743.TarefeTitle</td>
-                                        <td>@dyn743.TarefeId</td>
-                                        <td>@dyn743.TarefePrice</td>
-                                    </tr>
+        @foreach (var dyn743 in Model.tarefeList)
+         {
+             @if (dyn743.Selected == true)
+             {
+                 <table style=" border-radius: 17px;text-align:justify; background-color:white;height:5vh; width:100%;" class="table">
+                     <tbody>
+                         <tr>
+                             <td style=" background-color:white;height:5vh; width:6vh;">#</td>
+                             <td style=" height:5vh; width:28vh;">@dyn743.TarefeTitle</td>
+                             <td style="height:5vh; width:28vh;">@dyn743.TarefeId</td>
+                             <td style="height:5vh; width:28vh;">@dyn743.TarefePrice</td>
+                             
+                         </tr>
                                   
-                                </tbody>
-                            </table>
-                            }
+                     </tbody>
+                 </table>
+             }
 
                         
-                    }
+         }
+
+        <button id="btnAdd"style="border-radius: 10px;background: #FFD600;" type="AddBill" class="btn btn">ثبت فاکتور</button>
+
 
 
         <style>
             .g-col-1 {
                 box-sizing: border-box;
                 
-                width: 400px;
+                width: 50%;
                 height: 141px;
                 background: #FFD600;
                 border-radius: 17px;
@@ -74,21 +102,14 @@
 
             .g-col-2 {
                 box-sizing: border-box;
-                width: 200px;
+                width: 30%;
                 height: 141px;
                 background: #FFffff;
                 border-radius: 17px;
                 margin: 20px;
             }
 
-            .g-col-3 {
-                box-sizing: border-box;
-                width: 200px;
-                height: 141px;
-                background: #FFffff;
-                border-radius: 17px;
-                margin: 20px;
-            }
+            
 
 
         </style>
@@ -100,7 +121,60 @@
 
 
 </form>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+
+
+    $(window).load(function () {
+    function Calculate() {
+
+        var totalPrice = 0;
+
+        $("#total").text("0");
+
+        $("table").each(function (index, value) {
+
+            if ((this.id) == "Selected") {
+
+                console.log(`div${index}: ${(this.id).substring(0, 1)} : ${this.value}`);
+
+                totalPrice = totalPrice + parseFloat(this.value);
+
+                $("#total").text(totalPrice);
+
+            }
+        });
+
+    }
+ } 
 
 
 
+ $('#btnAdd').click(function () {
+        var model = {
+            PersonId: $('#txtName').val(),
+            S_Family: $('#txtFamily').val(),
+            S_Mobile: $('#txtMobile').val()
 
+           
+        };
+
+        $.ajax({
+            url: "/Home/AddStudent",
+            type: "Post",
+            data: model,
+            dataType: "json",
+            beforeSend: function () {
+                //alert('starting...');
+            },
+            complete: function () {
+                //alert('finished!');
+            },
+            success: function (data) {
+
+                alert(JSON.stringify(data));
+
+                alert(data.S_ID+' was added!');
+            },
+
+</script>

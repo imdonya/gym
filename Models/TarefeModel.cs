@@ -1,6 +1,14 @@
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.Scripting.Runtime;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Data.SqlClient;
+using System.Globalization;
+using System.Threading.Tasks;
+using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace gym.Models
 {
@@ -15,6 +23,7 @@ namespace gym.Models
         public Int64 service_id { get; set; }
         public bool Selected { get; set; }
         public ErrorViewModel er { get; set; }
+        
         static string ConUrl = "server=DESKTOP-CE0SVTO\\PVSSQL2012; database=nid_Develop3.14; integrated security=true;";
         //static string ConUrl = "server=.\\ELCAMSQLSERVER; database=nid_Develop3.14; integrated security=true;";
 
@@ -112,6 +121,35 @@ namespace gym.Models
         //    con.Close();
         //    return model;
         //}
+
+
+
+
+
+
+
+
+        public class AccountMetaData
+        {
+            [ModelBinder(BinderType = typeof(CustomDateTimeModelBinder))]
+            [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+            public DateTime Birthday { get; set; }
+        }
+        public class CustomDateTimeModelBinder : IModelBinder
+        {
+            public Task BindModelAsync(ModelBindingContext bindingContext)
+            {
+                var displayFormatString = bindingContext.ModelMetadata.DisplayFormatString;
+                var value = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+                if (!string.IsNullOrEmpty(displayFormatString) && !string.IsNullOrEmpty(value.FirstValue))
+                {
+                    displayFormatString = displayFormatString.Replace("{0:", "").Replace("}", "");
+                    var date = DateTime.ParseExact(value.FirstValue, displayFormatString, CultureInfo.InvariantCulture);
+                    bindingContext.Result = ModelBindingResult.Success(date);
+                }
+                return Task.CompletedTask;
+            }
+        }
     }
 
 
