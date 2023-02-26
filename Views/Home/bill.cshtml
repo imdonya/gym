@@ -18,7 +18,9 @@
          <div style="direction:rtl;" class="text-md-right">
             @{
                 var person = Model.personInfo;
-                    <p> نام و نام خانوادگی :@person.PersonName </p>
+                    <p > نام و نام خانوادگی :@person.PersonName </p>
+                        <input type="textbox"   id="txtName" value = @person.PersonId />
+                    
             }
         </div>
 
@@ -85,8 +87,6 @@
                         
          }
 
-        <button id="btnAdd"style="border-radius: 10px;background: #FFD600;" type="AddBill" class="btn btn">ثبت فاکتور</button>
-
 
 
         <style>
@@ -118,63 +118,91 @@
     <footer>
     </footer>
 
-
+        
 
 </form>
+
+
+     
+        <button id="btnAdd"style="border-radius: 10px;background: #FFD600;" type="AddBill" class="btn btn">ثبت فاکتور</button>
+
+
+
+
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
+    //$(window).load(function () {
+    $(document).ready(function () {
+        console.log(`win loaded`);
+    //function Calculate() {
 
+    //    var totalPrice = 0;
 
-    $(window).load(function () {
-    function Calculate() {
+    //    $("#total").text("0");
 
-        var totalPrice = 0;
+    //    $("table").each(function (index, value) {
 
-        $("#total").text("0");
+    //        if ((this.id) == "Selected") {
 
-        $("table").each(function (index, value) {
+    //            console.log(`div${index}: ${(this.id).substring(0, 1)} : ${this.value}`);
 
-            if ((this.id) == "Selected") {
+    //            totalPrice = totalPrice + parseFloat(this.value);
 
-                console.log(`div${index}: ${(this.id).substring(0, 1)} : ${this.value}`);
+    //            $("#total").text(totalPrice);
 
-                totalPrice = totalPrice + parseFloat(this.value);
+    //        }
+    //    });
 
-                $("#total").text(totalPrice);
-
-            }
-        });
-
-    }
- } 
-
-
+    //};
+  
+    var name = $('#txtName').val();
+    console.log(`test: ${name}`);
 
  $('#btnAdd').click(function () {
-        var model = {
-            PersonId: $('#txtName').val(),
-            S_Family: $('#txtFamily').val(),
-            S_Mobile: $('#txtMobile').val()
+     console.log(`clicked`);
+        //var model = {
+        //    PersonId: $('#txtName').val(),
+        //    S_Family: $('#txtFamily').val(),
+        //    S_Mobile: $('#txtMobile').val()
 
            
-        };
+        //};
 
-        $.ajax({
-            url: "/Home/AddStudent",
-            type: "Post",
-            data: model,
-            dataType: "json",
-            beforeSend: function () {
-                //alert('starting...');
-            },
-            complete: function () {
-                //alert('finished!');
-            },
-            success: function (data) {
+        //$.ajax({
+        //    url: "/Home/AddStudent",
+        //    type: "Post",
+        //    data: model,
+        //    dataType: "json",
+        //    beforeSend: function () {
+        //        //alert('starting...');
+        //    },
+        //    complete: function () {
+        //        //alert('finished!');
+        //    },
+        //    success: function (data) {
 
-                alert(JSON.stringify(data));
+        //        alert(JSON.stringify(data));
 
-                alert(data.S_ID+' was added!');
-            },
+        //        alert(data.S_ID+' was added!');
+        //    },
+
+
+        
+        
+                        $.ajax({
+
+                            type: "POST", //HTTP POST Method
+                            url: "SaveFactor", // Controller/method
+                            data: { //Passing data
+                                PersonId: $('#txtName').val() //$("#txtName").val() //Reading text box values using Jquery
+
+                            }, success: function (data) { location.reload(); }
+                        });
+                    
+                });
+
+        });
+        
 
 </script>

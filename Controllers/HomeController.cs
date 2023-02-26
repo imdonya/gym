@@ -22,6 +22,7 @@ namespace gym.Controllers
         public static List<TarefeModel> tarefeModel = new List<TarefeModel>();
         public static Int64 persenId;
         public static PersonModel personInfo;
+        public static billModel factorModel;
 
         public static dynamic mymodel = new ExpandoObject();
         public static bool firstRun;
@@ -33,11 +34,12 @@ namespace gym.Controllers
 
             tarefeModel = TarefeModel.GetList();
             personInfo = PersonModel.GetInfo(persenId);
+            
 
             mymodel.tarefeList = tarefeModel;
             mymodel.personInfo = personInfo;
 
-
+            
         }
 
         public HomeController(ILogger<HomeController> logger)
@@ -122,6 +124,32 @@ namespace gym.Controllers
                 model.Selected = false;
 
             }
+        }
+
+
+        public void SaveFactor()
+        {
+            Int64 id = Convert.ToInt64(Request.Form["PersonId"].ToString());
+
+
+            foreach (var model in mymodel.tarefeList)
+            {
+                if (model.Selected)
+                {
+                    factorModel = new billModel();
+                    factorModel.Bedehkar_F32 = model.TarefePrice;
+                    factorModel.Bestankar_F31 = model.TarefePrice;
+                    factorModel.PersonId = id;
+                    factorModel.PersonShowName_F21 = mymodel.personInfo.PersonName;
+                   
+
+
+
+
+                    billModel.AddBill(factorModel);
+                }
+            }
+
         }
 
 
