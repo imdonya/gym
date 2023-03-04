@@ -23,7 +23,7 @@ namespace gym.Controllers
         public static List<TarefeModel> tarefeModel = new List<TarefeModel>();
         public static Int64 persenId;
         public static PersonModel personInfo;
-        public static billModel factorModel;
+        public static FactorModel factorModel;
         public DateAndTime DateAndTime;
 
         public static dynamic mymodel = new ExpandoObject();
@@ -141,7 +141,7 @@ namespace gym.Controllers
             {
                 if (model.Selected)
                 {
-                    factorModel = new billModel();
+                    factorModel = new FactorModel();
                     factorModel.Bedehkar_F32 = model.TarefePrice;
                     factorModel.Bestankar_F31 = model.TarefePrice;
                     factorModel.PersonId = id;
@@ -151,7 +151,7 @@ namespace gym.Controllers
 
 
 
-                    billModel.AddBill(factorModel);
+                    FactorModel.AddBill(factorModel);
                 }
             }
 
@@ -166,7 +166,7 @@ namespace gym.Controllers
             {
                 if (model.Selected)
                 {
-                    factorModel = new billModel();
+                    factorModel = new FactorModel();
                     factorModel.gheymat_f5 = model.TarefePrice;
                     factorModel.PersonId_F9 = id;
                     factorModel.KhedmatName_F46 = model.service_name;
@@ -184,7 +184,7 @@ namespace gym.Controllers
                     factorModel.ArzeshAfzodeh_F133 = 0;
                     factorModel.PersonShowName_F21 = mymodel.personInfo.PersonName;
 
-                    billModel.AddServiceFile(factorModel);
+                    FactorModel.AddServiceFile(factorModel);
 
 
                 }
