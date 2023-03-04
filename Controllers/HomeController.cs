@@ -160,23 +160,7 @@ namespace gym.Controllers
         {
             Int64 id = Convert.ToInt64(Request.Form["PersonId"].ToString());
             string servis_name = Request.Form["PersonId"].ToString();
-            string ConUrl = "server=DESKTOP-CE0SVTO\\PVSSQL2012; database=nid_Develop3.14; integrated security=true;";
-
-            SqlConnection con = new SqlConnection(ConUrl);
-            con.Open();
-            List<TarefeModel> MyList = new List<TarefeModel>();
-            SqlCommand command = new SqlCommand("Select * from dyn_979", con);
-            Console.WriteLine("cm:" + command);
-            SqlDataReader dr1 = command.ExecuteReader();
-
-            while (dr1.Read())
-            {
-                MyList.Add(new TarefeModel
-                {
-                    service_id = Convert.ToInt64(dr1["Id"]),
-                    service_name = dr1["F1"].ToString()
-                });
-
+           
             
             foreach (var model in mymodel.tarefeList)
             {
@@ -205,7 +189,7 @@ namespace gym.Controllers
 
                 }
             }
-            }
+            
 
         }
 

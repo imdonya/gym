@@ -152,5 +152,62 @@ namespace gym.Models
 
         }
 
+
+
+
+
+
+
+        //************************************سند******************************
+
+        //public static bool AddSanad(billModel model)
+        //{
+
+        //    SqlConnection con = new SqlConnection(ConUrl);
+
+        //    if (con.State != ConnectionState.Open) con.Open();
+
+        //    string cm = "insert into dyn_1030( F1,F2,F3,F4,F5,F6,F7,F8,F9,F11,F12,F13,F14,F15,F16,F17,F18,F19,F20,F21,F22,F23,F24,F25,F26,F28,F28_2, F29,F30,F31, F32, F33,F34,F36, F37,F38,F27 ) values " +
+        //        "(@F1_KolHesabdari,F2,F3,F4,F5,F6,F7,F8,F9,F11,F12,F13,F14,F15,F16,F17,F18,F19,F20,F21,F22,F23,F24,F25,F26,F28,F28_2, F29,F30,F31, F32, F33,F34,F36, F37,F38,F27 )";
+        //    SqlCommand command = new SqlCommand(cm, con);
+        //    command.Parameters.AddWithValue("@gheymat_f5", model.gheymat_f5);
+        //    command.Parameters.AddWithValue("darkhastdateTime_F6", DateTime.Now.ToString("yyyy/mm/dd HH:mm"));
+        //    command.Parameters.AddWithValue("startdateTime_F20", DateTime.Now.ToString("yyyy/mm/dd HH:mm"));
+        //    command.Parameters.AddWithValue("EndTime_F31", DateTime.Now.ToString("yyyy/mm/dd HH:mm"));
+        //    command.Parameters.AddWithValue("@PersonId_F9", model.PersonId_F9);
+        //    command.Parameters.AddWithValue("@F11", 2);
+        //    command.Parameters.AddWithValue("@tedadJalase_F16", 12);
+        //    command.Parameters.AddWithValue("@JalasatUse_F17", 0);
+        //    command.Parameters.AddWithValue("@Jalasatrem_F18", 12);
+        //    command.Parameters.AddWithValue("@unit_F15", model.unit_F15);
+        //    command.Parameters.AddWithValue("@tarefeId_F36", model.tarefeId_F36);
+        //    command.Parameters.AddWithValue("@Price_F38", model.Price_F38);
+        //    command.Parameters.AddWithValue("@ChainId_F43", String.Empty);
+        //    command.Parameters.AddWithValue("@KhedmatName_F46", model.KhedmatName_F46);
+        //    command.Parameters.AddWithValue("@DefaultEndTime_F53", DateTime.Now.ToString("yyyy/mm/dd HH:mm"));
+        //    command.Parameters.AddWithValue("@MaxFreezDay_F55", model.MaxFreezDay_F55);
+        //    command.Parameters.AddWithValue("@PayAmount_F59", model.PayAmount_F59);
+        //    command.Parameters.AddWithValue("@OffPerc_F61", model.OffPerc_F61);
+        //    command.Parameters.AddWithValue("@OffAmount_f62", model.OffAmount_f62);
+        //    command.Parameters.AddWithValue("@MustPayAmount_F63", model.MustPayAmount_F63);
+        //    command.Parameters.AddWithValue("@Bedehkar_F64", model.Bedehkar_F64);
+        //    command.Parameters.AddWithValue("@CoachMoney_F68", model.CoachMoney_F68);
+        //    command.Parameters.AddWithValue("@Bedehkar_F91", model.Bedehkar_F91);
+        //    command.Parameters.AddWithValue("@ArzeshAfzodeh_F133", model.ArzeshAfzodeh_F133);
+
+
+
+        //    Console.WriteLine(command.CommandText);
+
+        //    command.ExecuteNonQuery();
+
+        //    con.Close();
+
+
+        //    return true;
+
+
+        //}
+
     }
 }
