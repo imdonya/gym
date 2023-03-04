@@ -22,6 +22,11 @@ namespace gym.Models
         public string service_name { get; set; }
         public Int64 service_id { get; set; }
         public bool Selected { get; set; }
+        public DateTime StartTime_F23 { get; set; }
+        public DateTime EndTime_F25 { get; set; }
+        public DateTime Zaman_F88 { get; set; }
+        public string morabiName_F53 { get; set; }
+
         public ErrorViewModel er { get; set; }
         
         static string ConUrl = "server=DESKTOP-CE0SVTO\\PVSSQL2012; database=nid_Develop3.14; integrated security=true;";
@@ -48,7 +53,13 @@ namespace gym.Models
                     TarefePrice = Convert.ToInt64(dr["F40"]),
                     khedmatId = dr["F66"].ToString() != string.Empty ? Convert.ToInt64(dr["F66"]) : 0,
                     TarefeTitle = dr["F35"].ToString(),
+                   
+                    //StartTime_F23 = Convert.ToDateTime(dr["F23"]),
+                    //EndTime_F25 = Convert.ToDateTime(dr["F25"]),
+                    //Zaman_F88 = Convert.ToDateTime(dr["F88"]),
+                    //morabiName_F53 = dr["F53"].ToString(),
                     Selected = false
+
                 });
 
             }

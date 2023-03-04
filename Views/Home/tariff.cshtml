@@ -17,17 +17,21 @@
 
 
 
-    <header>
-        <div style="direction:rtl;" class="text-md-right">
-            @{
-                var person = Model.personInfo;
-                <p> نام و نام خانوادگی :@person.PersonName </p>
-            }
-        </div>
+<header  class="w-100 p-5">
+    <input style="direction:rtl;" class="text-sm-right" value="@{
+        var person = Model.personInfo;@person.PersonName
+ }">
+    <input style="direction:rtl;" class="text-sm-right" value="@{
+        var person2 = Model.personInfo;
+        @person2.PersonName
+ }">
+           
+        
+
     </header>
 
 
-    <body style="background-color:yellow;direction:rtl;text-align:justify;">
+    <body style="direction:rtl;text-align:justify;">
       
         
             @foreach (var dyn979 in Model.tarefeList)

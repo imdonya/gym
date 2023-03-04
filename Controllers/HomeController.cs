@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http.Extensions;
 using System.Data.SqlClient;
 using System.Data;
 using System.Dynamic;
+using Microsoft.VisualBasic;
 
 namespace gym.Controllers
 {
@@ -23,18 +24,22 @@ namespace gym.Controllers
         public static Int64 persenId;
         public static PersonModel personInfo;
         public static billModel factorModel;
+        public DateAndTime DateAndTime;
 
         public static dynamic mymodel = new ExpandoObject();
         public static bool firstRun;
-
+        public static TarefeModel servisInfo;
         public void init()
         {
 
             persenId = 1037007310000000103;
-
+            DateTime.Now.ToString("yyyy/mm/dd HH:mm");
+            
             tarefeModel = TarefeModel.GetList();
             personInfo = PersonModel.GetInfo(persenId);
             
+
+
 
             mymodel.tarefeList = tarefeModel;
             mymodel.personInfo = personInfo;
@@ -141,7 +146,7 @@ namespace gym.Controllers
                     factorModel.Bestankar_F31 = model.TarefePrice;
                     factorModel.PersonId = id;
                     factorModel.PersonShowName_F21 = mymodel.personInfo.PersonName;
-                   
+
 
 
 
@@ -151,19 +156,63 @@ namespace gym.Controllers
             }
 
         }
+        public void ServiceFile()
+        {
+            Int64 id = Convert.ToInt64(Request.Form["PersonId"].ToString());
+            string servis_name = Request.Form["PersonId"].ToString();
+            string ConUrl = "server=DESKTOP-CE0SVTO\\PVSSQL2012; database=nid_Develop3.14; integrated security=true;";
+
+            SqlConnection con = new SqlConnection(ConUrl);
+            con.Open();
+            List<TarefeModel> MyList = new List<TarefeModel>();
+            SqlCommand command = new SqlCommand("Select * from dyn_979", con);
+            Console.WriteLine("cm:" + command);
+            SqlDataReader dr1 = command.ExecuteReader();
+
+            while (dr1.Read())
+            {
+                MyList.Add(new TarefeModel
+                {
+                    service_id = Convert.ToInt64(dr1["Id"]),
+                    service_name = dr1["F1"].ToString()
+                });
+
+            
+            foreach (var model in mymodel.tarefeList)
+            {
+                if (model.Selected)
+                {
+                    factorModel = new billModel();
+                    factorModel.gheymat_f5 = model.TarefePrice;
+                    factorModel.PersonId_F9 = id;
+                    factorModel.KhedmatName_F46 = model.service_name;
+                    factorModel.unit_F15 = "جلسه";
+                    factorModel.tarefeId_F36 = model.TarefeId;
+                    factorModel.EndTime_F31 = model.EndTime_F25;
+                    factorModel.MaxFreezDay_F55 = 0;  //!!!!!!!!!!
+                    factorModel.PayAmount_F59 = model.TarefePrice;
+                    factorModel.OffPerc_F61 = 0; //!!!
+                    factorModel.OffAmount_f62 = 0;
+                    factorModel.MustPayAmount_F63 = 0;
+                    factorModel.Bedehkar_F64 = 0;
+                    factorModel.CoachMoney_F68 = "0";  //!!!!!!!!!!!!
+                    factorModel.Bedehkar_F91 = 0;
+                    factorModel.ArzeshAfzodeh_F133 = 0;
+                    factorModel.PersonShowName_F21 = mymodel.personInfo.PersonName;
+
+                    billModel.AddServiceFile(factorModel);
 
 
+                }
+            }
+            }
 
+        }
 
-
-
-
-
-
-
-
-
-
+        private static void NewMethod(dynamic model)
+        {
+            factorModel.KhedmatName_F46 = model.service_name;
+        }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

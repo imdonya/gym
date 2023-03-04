@@ -73,10 +73,14 @@
                  <table style=" border-radius: 17px;text-align:justify; background-color:white;height:5vh; width:100%;" class="table">
                      <tbody>
                          <tr>
-                             <td style=" background-color:white;height:5vh; width:6vh;">#</td>
-                             <td style=" height:5vh; width:28vh;">@dyn743.TarefeTitle</td>
+                             <td style="background-color:white;height:5vh; width:6vh;">#</td>
+                             <td style="height:5vh; width:28vh;">@dyn743.TarefeTitle</td>
                              <td style="height:5vh; width:28vh;">@dyn743.TarefeId</td>
                              <td style="height:5vh; width:28vh;">@dyn743.TarefePrice</td>
+@*                             <td style="height:5vh; width:28vh;">@dyn743.StartTime_F23</td>
+                             <td style="height:5vh; width:28vh;">@dyn743.EndTime_F25</td>
+                             <td style="height:5vh; width:28vh;">@dyn743.Zaman_F88</td>
+                             <td style="height:5vh; width:28vh;">@dyn743.morabiName_F53</td>*@
                              
                          </tr>
                                   
@@ -135,74 +139,53 @@
     //$(window).load(function () {
     $(document).ready(function () {
         console.log(`win loaded`);
-    //function Calculate() {
-
-    //    var totalPrice = 0;
-
-    //    $("#total").text("0");
-
-    //    $("table").each(function (index, value) {
-
-    //        if ((this.id) == "Selected") {
-
-    //            console.log(`div${index}: ${(this.id).substring(0, 1)} : ${this.value}`);
-
-    //            totalPrice = totalPrice + parseFloat(this.value);
-
-    //            $("#total").text(totalPrice);
-
-    //        }
-    //    });
-
-    //};
+    
   
     var name = $('#txtName').val();
     console.log(`test: ${name}`);
 
- $('#btnAdd').click(function () {
-     console.log(`clicked`);
-        //var model = {
-        //    PersonId: $('#txtName').val(),
-        //    S_Family: $('#txtFamily').val(),
-        //    S_Mobile: $('#txtMobile').val()
+        $('#btnAdd').click(function () {
+            console.log(`clicked`);
+       
+     
+     
+        $.ajax({
+                type: "POST", //HTTP POST Method
+                 url: "SaveFactor", // Controller/method
+         data: { //Passing data
+             PersonId: $('#txtName').val() //$("#txtName").val() //Reading text box values using Jquery
 
-           
-        //};
-
-        //$.ajax({
-        //    url: "/Home/AddStudent",
-        //    type: "Post",
-        //    data: model,
-        //    dataType: "json",
-        //    beforeSend: function () {
-        //        //alert('starting...');
-        //    },
-        //    complete: function () {
-        //        //alert('finished!');
-        //    },
-        //    success: function (data) {
-
-        //        alert(JSON.stringify(data));
-
-        //        alert(data.S_ID+' was added!');
-        //    },
-
-
-        
-        
-                        $.ajax({
-
-                            type: "POST", //HTTP POST Method
-                            url: "SaveFactor", // Controller/method
-                            data: { //Passing data
-                                PersonId: $('#txtName').val() //$("#txtName").val() //Reading text box values using Jquery
-
-                            }, success: function (data) { location.reload(); }
+                }, success: function (data) { location.reload(); }
                         });
                     
                 });
 
         });
+
+    $(document).ready(function () {
+        console.log(`win loaded`);
+
+
+        var name = $('#txtName').val();
+        console.log(`test: ${name}`);
+
+        $('#btnAdd').click(function () {
+            console.log(`clicked`);
+
+
+
+            $.ajax({
+                type: "POST", //HTTP POST Method
+                url: "ServiceFile", // Controller/method
+                data: { //Passing data
+                    PersonId: $('#txtName').val() //$("#txtName").val() //Reading text box values using Jquery
+
+                }, success: function (data) { location.reload(); }
+            });
+
+        });
+
+    });
         
 
 </script>
