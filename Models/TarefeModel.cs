@@ -27,8 +27,16 @@ namespace gym.Models
         public DateTime Zaman_F88 { get; set; }
         public string morabiName_F53 { get; set; }
 
+        public int durationCount_F24 { get; set; }
+
+        public int durationUnit_F30 { get; set; }
+
+        public int jalaseCount_F28 { get; set; }
+
+        public string tarefeCode { get; set; }
+
         public ErrorViewModel er { get; set; }
-        
+
         static string ConUrl = "server=DESKTOP-CE0SVTO\\PVSSQL2012; database=nid_Develop3.14; integrated security=true;";
         //static string ConUrl = "server=.\\ELCAMSQLSERVER; database=nid_Develop3.14; integrated security=true;";
 
@@ -52,9 +60,14 @@ namespace gym.Models
                     TarefeId = Convert.ToInt64(dr["Id"]),
                     TarefePrice = Convert.ToInt64(dr["F40"]),
                     khedmatId = dr["F66"].ToString() != string.Empty ? Convert.ToInt64(dr["F66"]) : 0,
+                    service_name = dr["F51"].ToString(),
                     TarefeTitle = dr["F35"].ToString(),
                    
-                    //StartTime_F23 = Convert.ToDateTime(dr["F23"]),
+                    durationUnit_F30 = Convert.ToInt32(dr["F30"]),
+                    durationCount_F24 = Convert.ToInt32(dr["F24"]),
+                    jalaseCount_F28 = Convert.ToInt32(dr["F28"]),
+
+                    tarefeCode = dr["F87"].ToString(),
                     //EndTime_F25 = Convert.ToDateTime(dr["F25"]),
                     //Zaman_F88 = Convert.ToDateTime(dr["F88"]),
                     //morabiName_F53 = dr["F53"].ToString(),
@@ -85,33 +98,7 @@ namespace gym.Models
             return MyList;
 
         }
-        //public static List<Tariffdyn743Model> GetServiceList()
-        //{
 
-        //    SqlConnection con = new SqlConnection(ConUrl);
-        //    con.Open();
-
-
-        //    SqlCommand command = new SqlCommand("Select * from dyn_979", con);
-        //    Console.WriteLine("cm:" + command);
-        //    SqlDataReader dr = command.ExecuteReader();
-        //    List<Tariffdyn743Model> dyn_979 = new List<Tariffdyn743Model>();
-
-        //    while (dr.Read())
-        //    {
-        //        dyn_979.Add(new Tariffdyn743Model
-        //        {
-        //            service_id = Convert.ToDouble(dr["Id"]),
-        //            service_F1 = dr["F1"].ToString()
-        //        });
-
-        //    }
-
-        //    con.Close();
-
-        //    return dyn_979;
-
-        //}
         public static TarefeModel Select()
         {
             return Select();
@@ -120,21 +107,6 @@ namespace gym.Models
         {
             return model;
         }
-        //public static Tariffdyn743Model AddStudent(Tariffdyn743Model model)
-        //{
-        //    SqlConnection con = new SqlConnection(ConUrl);
-        //    SqlCommand command = new SqlCommand("insert into Students values (@name, @family, @mobile)", con);
-        //    command.Parameters.AddWithValue("@name", model.F40);
-        //    command.Parameters.AddWithValue("@price", model.F40);
-        //    command.Parameters.AddWithValue("@cat", model.F40);
-        //    con.Open();
-        //    command.ExecuteNonQuery();
-        //    con.Close();
-        //    return model;
-        //}
-
-
-
 
 
 
@@ -161,6 +133,8 @@ namespace gym.Models
                 return Task.CompletedTask;
             }
         }
+
+
     }
 
 

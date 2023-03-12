@@ -17,31 +17,27 @@
 
 
 
-<header  class="w-100 p-5">
-    <input style="direction:rtl;" class="text-sm-right" value="@{
-        var person = Model.personInfo;@person.PersonName
- }">
-    <input style="direction:rtl;" class="text-sm-right" value="@{
-        var person2 = Model.personInfo;
-        @person2.PersonName
- }">
-           
-        
+<header class=" row w-100 p-2 text-sm-right" style="background-color:white;border-radius: 17px;">
+    
+    <input style="direction:rtl; border:none; block-size:none;" class="text-sm-centr" value="@{var person = Model.personInfo;@person.PersonName }"> 
+    <div class="text-lg-right">،به باشگاه خوش اومدی</div>
 
-    </header>
+</header>
 
 
-    <body style="direction:rtl;text-align:justify;">
-      
-        
+<body style="direction:rtl;text-align:justify;background-color:#E7F8FC;">
+
+    
             @foreach (var dyn979 in Model.tarefeList)
             {
-
-                @if (dyn979.service_id != -1)
+                
+                if (dyn979.service_id != -1)
                 {
                             <div style=" border-radius: 17px;margin:5px;" class="row">
 
-                            <div style=" height:100px; width:15vh;background: linear-gradient(90deg, #FF8900 23.23%, #FE4D01 100%);text-align:center; margin:5px;padding:2%;">@dyn979.service_name </div>
+                            <div id="mainCAt" style=" height:100px; width:15vh;background: linear-gradient(90deg, #FF8900 23.23%, #FE4D01 100%);text-align:center; margin:5px;padding:2%;">@dyn979.service_name
+                                <div>@GetColorIndex(1)</div>
+                            </div>
 
                         @foreach (var dyn743 in Model.tarefeList)
                         {
@@ -49,7 +45,21 @@
                             {
                                 @if (dyn743.khedmatId == dyn979.service_id)
                                 {
-                                    <button id=@dyn743.TarefeId onclick="" value=@dyn743.TarefePrice style="margin:5px;height:100px; width:25vh;border:none;background: linear-gradient(90deg,#FFFFFF 55%, rgba(219, 214, 214, 0.64)  100%);text-align:center;">@dyn743.TarefeTitle @dyn743.TarefePrice</button>
+
+                                    @if (dyn743.Selected == true)
+                                    {
+                                        <button class="btn" id=@dyn743.TarefeId onclick="" value=@dyn743.TarefePrice style="background-color:cadetblue;  margin:5px;   height:100px;  width:25vh; text-align:center;   border: 1px dashed #000000;">
+                                            <div >@dyn743.TarefeTitle</div>
+                                            <div >@dyn743.TarefePrice</div>
+                                
+                                        </button>
+                                    }else{
+                                        <button class="btn" id=@dyn743.TarefeId onclick="" value=@dyn743.TarefePrice style="margin:5px;   height:100px;  width:25vh; text-align:center;   border: 1px dashed #000000;">
+                                            <div >@dyn743.TarefeTitle</div>
+                                            <div >@dyn743.TarefePrice</div>
+                                
+                                        </button>
+                                    }
                                 }
 
                             }
@@ -68,35 +78,26 @@
         <br />
          <div id="selection" style="direction:rtl;" class="text-md-right"></div>
 
-<table  style=" border-radius: 17px;text-align:justify; background-color:white;height:5vh; width:100%;" class="table">
 
     @foreach (var dyn743 in Model.tarefeList)
     {
      
         if (dyn743.Selected == true)
         {
-            int n = 0; 
+            int n = 0;
 
-                     <tbody id="Selected">
-                         <tr>
-                             <td style="height:5vh; width:6vh;">#</td>
-                             <td style=" height:5vh; width:28vh;">@dyn743.TarefeTitle</td>
-                             <td style="height:5vh; width:28vh;">@dyn743.TarefeId</td>
-                             <td style="height:5vh; width:28vh;">@dyn743.TarefePrice</td>
-                         </tr>
-                                  
-                     </tbody>
+            <button style="margin:5px;   height:100px;  width:25vh; text-align:center;   border: 1px dashed #000000;" id="Selected">@dyn743.TarefeTitle @dyn743.TarefePrice </button>
               
 
         }
 
     }
-</table>
+
 
 
 
     <style>
-
+        
     </style>
     </body>
 
@@ -140,32 +141,70 @@
     </footer>
 
 
+
+
+@functions{
+    public string GetColorIndex(int index)
+    {
+        int n = 9;
+        int R = 255;
+        int G = 255;
+        int B = 255;
+        int step = 255/(n / 3);
+        int Rlimit =1;
+        int Blimit = (n / 3) + 1;
+        int Glimit = 2*(n / 3) + 1;
+        string colorCode;
+
+        if (index <= Blimit)
+        {
+            R = -(index - Rlimit) * step;
+            G = 0;
+            B = (index - Rlimit) * step;
+
+        }
+        else if (index > Blimit & index <=Glimit)
+        {
+            R = 0;
+            G = (index - Blimit) * step;
+            B = -(index - Blimit) * step;
+        }
+        else if (index > Glimit)
+        {
+            R = (index - Glimit) * step;
+            G = -(index - Glimit) * step;
+            B = 0;
+
+        }
+        colorCode = G.ToString("x") ;
+
+        return colorCode;
+
+    }
+    }
+
+
 @*****************************************jQuery *****************************************@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
               $(document).ready(function () {
                 $("button").click(function () {
-                    //alert("clicked: "+ (this).value);
-
-
-                    // alert("click:");
-                    //$("input").write()
-                    //$("input").hide()
-                    // $(document).weite((this).id);
+                    ;
 
                     console.log("btn id:" + (this).id + " value :" + (this.value));
 
 
 
                     if (this.id != "Selected") {
-
+                      
 
                         $.ajax({
 
                             type: "POST", //HTTP POST Method
                             url: "SelectBtn", // Controller/method
                             data: { //Passing data
-                                BtnId: (this).id //$("#txtName").val() //Reading text box values using Jquery
+                            BtnId: (this).id //$("#txtName").val() //Reading text box values using Jquery
+                               
 
                             }, success: function (data) { location.reload(); }
                         });
@@ -185,6 +224,8 @@
 
             function Calculate() {
 
+
+
                 var totalPrice = 0;
 
                 $("#total").text("0");
@@ -196,6 +237,7 @@
                         
 
                         totalPrice = totalPrice + parseFloat(this.value);
+                       
 
                         $("#total").text(totalPrice);
 

@@ -37,14 +37,16 @@ namespace gym.Models
         //static string ConUrl = "server=.\\ELCAMSQLSERVER; database=nid_Develop3.14; integrated security=true;";
 
 
-        public static bool AddBill(FactorModel model)
+        public static Int64 AddBill(FactorModel model)
         {
 
             SqlConnection con = new SqlConnection(ConUrl);
 
             if (con.State != ConnectionState.Open) con.Open();
 
-            string cm = "insert into dyn_1003( F4, F5, F6, F16, F21, F23, F28, F31, F32, F33, F36, F37, F38, F41, F36_2, F48) values(GETDATE(),@PersonId,-1,1100005500000000103,@FactorName_F21,@PayMethod_F23,@BedehBestan_F28,@Bestankar_F31,@Bedehkar_F32,3,0,0,0,0,0,'FALSE')";
+            string cm = "insert into dyn_1003(Id, F4, F5, F6, F16, F21, F23, F28, F31, F32, F33, F36, F37, F38, F41, F36_2, F48)" +
+                " OUTPUT Inserted.Id" +
+                " values((NEXT VALUE FOR idseq_$1100013500000001003),GETDATE(),@PersonId,-1,1100005500000000103,@FactorName_F21,@PayMethod_F23,@BedehBestan_F28,@Bestankar_F31,@Bedehkar_F32,3,0,0,0,0,0,'FALSE')";
             SqlCommand command = new SqlCommand(cm, con);
             command.Parameters.AddWithValue("@PersonId", model.PersonId);
             //command.Parameters.AddWithValue("@user_F16", 1100005500000000103);
@@ -57,12 +59,14 @@ namespace gym.Models
 
             Console.WriteLine(command.CommandText);
 
-            command.ExecuteNonQuery();
+            object obj = command.ExecuteScalar();
 
             con.Close();
 
-
-            return true;
+            if (obj != null)
+                return Convert.ToInt64(obj);
+            else
+                return -1;
 
 
         }
