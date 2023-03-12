@@ -128,7 +128,41 @@
 
 
      
-        <button id="btnAdd"style="border-radius: 10px;background: #FFD600;" type="AddBill" class="btn btn">ثبت فاکتور</button>
+        
+        
+
+                <button type="button" class="btn btn-info btn-md" id="myBtn3">Modal with backdrop:"static"</button>
+
+        
+        <!-- Modal -->
+        <div style="border-radius: 17px;" class="modal fade" id="myModal3" role="dialog">
+            <div style=" direction:rtl;" class="modal-dialog">
+
+                <!-- Modal content-->
+                <div style="border-radius: 17px;" class="modal-content">
+                    <div style="border-radius: 17px;background-color:midnightblue;height:20vh;" class="modal-header">
+                        <div class="container text-center">
+                            <div class="row row-cols-auto">
+                                <div class="col"></div>
+                                <div class="col">Column</div>
+                                <div class="col">Column</div>
+                                <div class="col">Column</div>
+                                <div class="col"> </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div tabindex="2" style="border-radius: 17px;background-color:white;margin-top:-5vh;height:50vh;" class="modal-body">
+                        <p>You cannot click outside of this modal to close it.</p>
+                    </div>
+                    <div class="modal-footer  text-md-center">
+                        @*<button type="button" style="text-align:center;" class="btn btn-default" data-dismiss="modal">پرداخت</button>*@
+                        <button  id="btnAdd"style="border-radius: 10px;background: #FFD600;" type="AddBill" class="btn btn">ثبت فاکتور</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
 
 
 
@@ -136,6 +170,14 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
+
+    $(document).ready(function () {
+        
+        $("#myBtn3").click(function () {
+            $("#myModal3").modal({ backdrop: "static" });
+        });
+    });
+
     //$(window).load(function () {
     $(document).ready(function () {
         console.log(`win loaded`);

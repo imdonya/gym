@@ -36,7 +36,7 @@
                             <div style=" border-radius: 17px;margin:5px;" class="row">
 
                             <div id="mainCAt" style=" height:100px; width:15vh;background: linear-gradient(90deg, #FF8900 23.23%, #FE4D01 100%);text-align:center; margin:5px;padding:2%;">@dyn979.service_name
-                                <div>@GetColorIndex(1)</div>
+                                <div>@GetColorIndex(7)</div>
                             </div>
 
                         @foreach (var dyn743 in Model.tarefeList)
@@ -150,10 +150,14 @@
         int R = 255;
         int G = 255;
         int B = 255;
+        
+
         int step = 255/(n / 3);
         int Rlimit =1;
         int Blimit = (n / 3) + 1;
         int Glimit = 2*(n / 3) + 1;
+
+
         string colorCode;
 
         if (index <= Blimit)
@@ -176,7 +180,9 @@
             B = 0;
 
         }
-        colorCode = G.ToString("x") ;
+
+
+        colorCode = ((R * 65536) + (G * 256) +B).ToString("x");
 
         return colorCode;
 
@@ -184,6 +190,7 @@
     }
 
 
+  
 @*****************************************jQuery *****************************************@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <script>
