@@ -22,6 +22,7 @@ namespace gym.Models
         public string service_name { get; set; }
         public Int64 service_id { get; set; }
         public bool Selected { get; set; }
+        public int Color { get; set; }
         public DateTime StartTime_F23 { get; set; }
         public DateTime EndTime_F25 { get; set; }
         public DateTime Zaman_F88 { get; set; }
@@ -71,7 +72,9 @@ namespace gym.Models
                     //EndTime_F25 = Convert.ToDateTime(dr["F25"]),
                     //Zaman_F88 = Convert.ToDateTime(dr["F88"]),
                     //morabiName_F53 = dr["F53"].ToString(),
-                    Selected = false
+                    Selected = false,
+                    Color= 0
+
 
                 });
 

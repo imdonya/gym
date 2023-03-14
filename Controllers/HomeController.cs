@@ -37,7 +37,7 @@ namespace gym.Controllers
         public void init()
         {
 
-            persenId = 1037007310000000101; // 1037007310000000103;    1036007310000000100
+            persenId =  1037007310000000103;    /*1036007310000000100*/
             DateTime.Now.ToString("yyyy/mm/dd HH:mm");
             
             tarefeModel = TarefeModel.GetList();
@@ -75,6 +75,8 @@ namespace gym.Controllers
             return View(mymodel);
 
         }
+
+        [HttpPost]
         public IActionResult bill()
         {
 
@@ -118,6 +120,7 @@ namespace gym.Controllers
             
         }
 
+
         #region Methods
 
         [HttpPost]
@@ -127,10 +130,10 @@ namespace gym.Controllers
             //Int64 id = model.TarefeId;
 
             Int64 id = Convert.ToInt64(Request.Form["BtnId"].ToString());
-
+            int ColorIndex = Convert.ToInt32(Request.Form["colIndex"].ToString());
             //TarefeModel mm = mymodel.tarefeList;
 
-            FlagBtn(id);
+            FlagBtn(id, ColorIndex);
 
             return Ok();
 
@@ -145,13 +148,16 @@ namespace gym.Controllers
 
         }
 
-        public void FlagBtn(Int64 id)
+        public void FlagBtn(Int64 id, int ColorIndex)
         {
 
             foreach (var model in mymodel.tarefeList)
             {
                 if (model.TarefeId == id)
+                {
                     model.Selected = true;
+                    model.Color = ColorIndex;
+                }
 
             }
 

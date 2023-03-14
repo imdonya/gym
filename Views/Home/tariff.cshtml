@@ -15,28 +15,32 @@
 
 
 
-
-
 <header class=" row w-100 p-2 text-sm-right" style="background-color:white;border-radius: 17px;">
     
     <input style="direction:rtl; border:none; block-size:none;" class="text-sm-centr" value="@{var person = Model.personInfo;@person.PersonName }"> 
-    <div class="text-lg-right">،به باشگاه خوش اومدی</div>
+    <div class="text-lg-right">، به باشگاه خوش اومدی!<img style=" height:1em; width:1em;" src="@Url.Content("~/images/wave.png")" /></div>
 
 </header>
 
 
-<body style="direction:rtl;text-align:justify;background-color:#E7F8FC;">
 
-    
+
+<body style="direction:rtl;text-align:justify;background-color:#E7F8FC;">
+    @{
+        int i = 0;
+        Int64 summ = 0;
+
             @foreach (var dyn979 in Model.tarefeList)
             {
                 
+                
                 if (dyn979.service_id != -1)
                 {
+                    i = i + 50;
                             <div style=" border-radius: 17px;margin:5px;" class="row">
 
-                            <div id="mainCAt" style=" height:100px; width:15vh;background: linear-gradient(90deg, #FF8900 23.23%, #FE4D01 100%);text-align:center; margin:5px;padding:2%;">@dyn979.service_name
-                                <div>@GetColorIndex(7)</div>
+                                        <div id="mainCAt" style="font-size: 0.7em; height:100px; width:15vh;background-color:@(GetColorIndex(i)+"30");text-align:center; margin:5px;padding:2%;">@dyn979.service_name
+                                <div>@GetColorIndex(i)</div>
                             </div>
 
                         @foreach (var dyn743 in Model.tarefeList)
@@ -48,15 +52,15 @@
 
                                     @if (dyn743.Selected == true)
                                     {
-                                        <button class="btn" id=@dyn743.TarefeId onclick="" value=@dyn743.TarefePrice style="background-color:cadetblue;  margin:5px;   height:100px;  width:25vh; text-align:center;   border: 1px dashed #000000;">
-                                            <div >@dyn743.TarefeTitle</div>
-                                            <div >@dyn743.TarefePrice</div>
+                                        <button class="btn" id=@dyn743.TarefeId onclick="" style=" border-radius: 17px;background:repeating-linear-gradient(45deg, rgb(250, 252, 255)0, rgba(211, 211, 211, 1) 1px);  margin:5px; height:100px; width:15vh; text-align:center;   border: 3px dashed @(GetColorIndex(i)+"30");;">
+                                            
                                 
                                         </button>
                                     }else{
-                                        <button class="btn" id=@dyn743.TarefeId onclick="" value=@dyn743.TarefePrice style="margin:5px;   height:100px;  width:25vh; text-align:center;   border: 1px dashed #000000;">
-                                            <div >@dyn743.TarefeTitle</div>
-                                            <div >@dyn743.TarefePrice</div>
+                                           <button class="btn" id=@dyn743.TarefeId onclick="" value=@i  style=" border-radius: 17px;background-color:white; margin:5px;  height:100px; width:15vh; text-align:center; border-right: 8px solid @(GetColorIndex(i)+"30");">
+                                            <div style="font-size: 0.7em" >@dyn743.TarefeTitle</div>
+                                            
+                                            <div style="font-size: 0.7em" >@dyn743.TarefePrice</div>
                                 
                                         </button>
                                     }
@@ -69,6 +73,7 @@
                 }
 
             }
+        
  
 
  
@@ -81,24 +86,27 @@
 
     @foreach (var dyn743 in Model.tarefeList)
     {
-     
-        if (dyn743.Selected == true)
-        {
-            int n = 0;
 
-            <button style="margin:5px;   height:100px;  width:25vh; text-align:center;   border: 1px dashed #000000;" id="Selected">@dyn743.TarefeTitle @dyn743.TarefePrice </button>
-              
+            if (dyn743.Selected == true)
+            {
+
+
+                <button class="btn" style="border-right: 8px solid @(GetColorIndex(dyn743.Color)+"30"); border-radius: 17px;background-color:white; margin:5px;  height:100px; width:15vh; text-align:center;  font-size: 0.7em" id="Selected" >@dyn743.TarefeTitle <br/> @dyn743.TarefePrice </button>
+                
+                    summ = summ + dyn743.TarefePrice;
+                
 
         }
 
     }
 
+<h5> مجموع مبلغ: </h5>
+
+     <h5> @summ </h5>
+
+}
 
 
-
-    <style>
-        
-    </style>
     </body>
 
     <footer>
@@ -107,15 +115,6 @@
 
             <tr>
 
-                <td>
-                    <h5> مجموع مبلغ: </h5>
-                </td>
-                <td>
-                    <p>&emsp;</p>
-                </td>
-                <td>
-                    <h5 id="total"> 0 </h5>
-                </td>
                 <td>
                     <p>&emsp; &emsp; &emsp; &emsp;</p>
                 </td>
@@ -143,51 +142,74 @@
 
 
 
-@functions{
+@functions {
     public string GetColorIndex(int index)
     {
-        int n = 9;
-        int R = 255;
-        int G = 255;
-        int B = 255;
-        
+        int n = 255;
+        string R = "FF";
+        string G = "FF";
+        string B = "FF";
 
-        int step = 255/(n / 3);
-        int Rlimit =1;
+
+        int step = 255 / (n / 3);
+        int Rlimit = 1;
         int Blimit = (n / 3) + 1;
-        int Glimit = 2*(n / 3) + 1;
+        int Glimit = 2 * (n / 3) + 1;
 
 
         string colorCode;
 
-        if (index <= Blimit)
+        if (index < Blimit)
         {
-            R = -(index - Rlimit) * step;
-            G = 0;
-            B = (index - Rlimit) * step;
+            R = (255 - (index - Rlimit) * step).ToString("x");
+            G = "00";
+            B = ((index - Rlimit) * step).ToString("x");
 
         }
-        else if (index > Blimit & index <=Glimit)
+        else if (index == Blimit)
         {
-            R = 0;
-            G = (index - Blimit) * step;
-            B = -(index - Blimit) * step;
+            B = "FF";
+            R = "00";
+            G = "00";
+        }
+        else if (index > Blimit & index < Glimit)
+        {
+            R = "00";
+            G = ((index - Blimit) * step).ToString("x");
+            B = (255 - (index - Blimit) * step).ToString("x");
+        }
+        else if (index == Rlimit)
+        {
+            B = "00";
+            R = "FF";
+            G = "00";
         }
         else if (index > Glimit)
         {
-            R = (index - Glimit) * step;
-            G = -(index - Glimit) * step;
-            B = 0;
+            R = ((index - Glimit) * step).ToString("x");
+            G = (255 - (index - Glimit) * step).ToString("x");
+            B = "00";
 
         }
+        else if (index == Glimit)
+        {
+            B = "00";
+            R = "00";
+            G = "FF";
+        }
+        if (R.Length < 2) R = "0" + R;
+        if (G.Length < 2) G = "0" + G;
+        if (B.Length < 2) B = "0" + B;
 
+        colorCode = "#" + R + B + G;
+        //colorCode = B.ToString() + " - " + B.ToString() + "-" + G;
 
-        colorCode = ((R * 65536) + (G * 256) +B).ToString("x");
+        //colorCode = ((R * 65536) + (G * 256) +B).ToString("x");
 
         return colorCode;
 
     }
-    }
+}
 
 
   
@@ -210,7 +232,8 @@
                             type: "POST", //HTTP POST Method
                             url: "SelectBtn", // Controller/method
                             data: { //Passing data
-                            BtnId: (this).id //$("#txtName").val() //Reading text box values using Jquery
+                            BtnId: (this).id, //$("#txtName").val() //Reading text box values using Jquery
+                            ColIndex: this.value
                                
 
                             }, success: function (data) { location.reload(); }
