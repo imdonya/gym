@@ -15,7 +15,12 @@
 
 
 
-<header class=" row w-100 p-2 text-sm-right" style="background-color:white;border-radius: 17px;">
+
+
+
+ <div style=" background-color:#DFE8E9CF ; height:100%; width:100%; padding:15px;">
+
+     <header class=" row w-100 p-4 text-sm-right" style=" background-color:white;border-radius: 17px; margin-right:3px;">
     
     <input style="direction:rtl; border:none; block-size:none;" class="text-sm-centr" value="@{var person = Model.personInfo;@person.PersonName }"> 
     <div class="text-lg-right">، به باشگاه خوش اومدی!<img style=" height:1em; width:1em;" src="@Url.Content("~/images/wave.png")" /></div>
@@ -24,12 +29,22 @@
 
 
 
+<body style="direction:rtl;text-align:justify; ">
 
-<body style="direction:rtl;text-align:justify;background-color:#E7F8FC;">
+        <style> 
+body { 
+    background-image: url("https://img.freepik.com/free-photo/blurred-cardio-machines_1203-98.jpg?w=900&t=st=1678951885~exp=1678952485~hmac=c7b11f64902a94d3bb32015e1a7fabe56c16fd96cb6b43e045974254996f96d3"); 
+     background-repeat:no-repeat; 
+     background-size:cover; 
+     background-opacity: 0.5;
+
+}  
+</style>
     @{
+
         int i = 0;
         Int64 summ = 0;
-
+       
             @foreach (var dyn979 in Model.tarefeList)
             {
                 
@@ -39,8 +54,8 @@
                     i = i + 50;
                             <div style=" border-radius: 17px;margin:5px;" class="row">
 
-                                        <div id="mainCAt" style="font-size: 0.7em; height:100px; width:15vh;background-color:@(GetColorIndex(i)+"30");text-align:center; margin:5px;padding:2%;">@dyn979.service_name
-                                <div>@GetColorIndex(i)</div>
+                                        <div id="mainCAt" style="border-radius: 17px; font-size: 0.7em; height:100px; width:15vh;background-color:@(GetColorIndex(i)+"30");text-align:center; margin:5px;">@dyn979.service_name
+                                
                             </div>
 
                         @foreach (var dyn743 in Model.tarefeList)
@@ -91,20 +106,44 @@
             {
 
 
-                <button class="btn" style="border-right: 8px solid @(GetColorIndex(dyn743.Color)+"30"); border-radius: 17px;background-color:white; margin:5px;  height:100px; width:15vh; text-align:center;  font-size: 0.7em" id="Selected" >@dyn743.TarefeTitle <br/> @dyn743.TarefePrice </button>
-                
+                <button class="btn" style="vertical-align:middle; border-right: 8px solid @(GetColorIndex(dyn743.Color)+"30"); border-radius: 17px;background-color:white; margin:5px;  height:100px; width:15vh; text-align:center;  font-size: 0.7em" id="Selected" > @dyn743.TarefeTitle <br/> @dyn743.TarefePrice </button>
+
                     summ = summ + dyn743.TarefePrice;
-                
+       
 
         }
 
     }
 
-<h5> مجموع مبلغ: </h5>
+  
 
-     <h5> @summ </h5>
 
-}
+
+
+      <table>
+
+            <tr>
+
+                <td>
+                    <p>&emsp; &emsp; &emsp; &emsp;</p>
+                </td>
+                <td>
+                <br/>
+                    <form method="post" asp-controller="home" asp-action="bill" method="post">
+                        @*</input><td>@Html.ActionLink("Home", "SendToFactor", new { TarefeId = 1 })</td>*@
+                      <div class="row"> <img style=" height:2.5em; width:2.5em;" src="@Url.Content("~/images/banknote.png")" /><input style=" border: 2px solid #76C61F; border-radius: 17px; height:50px; width:850px;"  type="submit" name="test" value="@summ" id="save"> 
+                            </div>   
+
+                    </form>
+                </td>
+               
+
+            </tr>
+
+        </table>
+
+
+     }
 
 
     </body>
@@ -118,17 +157,12 @@
                 <td>
                     <p>&emsp; &emsp; &emsp; &emsp;</p>
                 </td>
-                <td>
-                    <form method="post" asp-controller="home" asp-action="bill" method="post">
-                        @*</input><td>@Html.ActionLink("Home", "SendToFactor", new { TarefeId = 1 })</td>*@
-                        <input type="submit" name="test" value="تایید نهایی" id="save"> 
-                    </form>
-                </td>
+               
                 <td>
                     <p>&emsp; &emsp; &emsp; &emsp;</p>
                 </td>
                 <td>
-                    <form method="post" asp-controller="home" asp-action="ClearAllBtn" method="post">
+                    <form  method="post" asp-controller="home" asp-action="ClearAllBtn" method="post">
                         <input type="submit" name="test" value="حذف همه" id="deleteAll"> 
                     </form>
                 </td>
@@ -139,7 +173,7 @@
         
     </footer>
 
-
+    </div>
 
 
 @functions {

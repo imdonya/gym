@@ -13,54 +13,32 @@
 
 
 
-<form style="padding:0px 10px 10px 10px; direction:rtl; text-align:center; background-color:gainsboro">
-    <header>
-         <div style="direction:rtl;" class="text-md-right">
-            @{
-                var person = Model.personInfo;
-                    <p > نام و نام خانوادگی :@person.PersonName </p>
-                        <input type="textbox"   id="txtName" value = @person.PersonId />
-                    
-            }
-        </div>
+<form style="padding:0px 10px 10px 10px; direction:rtl; text-align:center  background-color:#F6E5F4D6; ">
+    <header class=" row w-100 p-2 text-sm-right" style=" background-color:white;border-radius: 17px;">
+    
+    <input style="direction:rtl; border:none; block-size:none;" class="text-sm-centr" value="@{var person = Model.personInfo;@person.PersonName }"> 
+    <div class="text-lg-right"></div>
 
-    </header>
+</header>
 
 
-    <body>
+    <body style="direction:rtl;text-align:justify; background-color:#E2E2E2;">
 
         <div class="row  text-center">
-            <div class="g-col-1">
-                <table>
+            <div class="g-col-1 row">
+           
+                
 
-                    <tr>
-
-                        <td>
-                            <h5> مجموع مبلغ: </h5>
-                        </td>
-                        <td>
-                            <p>&emsp;</p>
-                        </td>
-                        <td>
-                            <h5 id="total"> 0 </h5>
-                        </td>
-                        <td>
-                            <p>&emsp; &emsp; &emsp; &emsp;</p>
-                        </td>
-                       
-                    </tr>
-
-                </table>
             </div>
-            <div class="g-col-2">.g-col-2</div>
+            <div class="g-col-2"><img class="gymlogo"  src="@Url.Content("~/images/logo-no-background.svg")" /></div>
         </div>
-        <table style=" border-radius: 17px;text-align:justify; background-color:white;height:5vh; width:100%;" class="table">
+        <table style=" border-radius: 10px;text-align:justify; background-color:white;height:5vh; width:100%;" class="table">
             <thead>
                 <tr>
-                    <th style="height:5vh; width:6vh;" scope="col">First</th>
-                    <th style="height:5vh; width:28vh;" scope="col">First</th>
-                    <th style="height:5vh; width:28vh;" scope="col">Last</th>
-                    <th style="height:5vh; width:28vh;" scope="col">Handle</th>
+                   
+                    <th style="height:5vh; width:28vh;" scope="col">نام تعرفه</th>
+                    <th style="height:5vh; width:28vh;" scope="col">تعداد</th>
+                    <th style="height:5vh; width:28vh;" scope="col">قیمت</th>
                 </tr>
             </thead>
             
@@ -73,9 +51,9 @@
                  <table style=" border-radius: 17px;text-align:justify; background-color:white;height:5vh; width:100%;" class="table">
                      <tbody>
                          <tr>
-                             <td style="background-color:white;height:5vh; width:6vh;">#</td>
+                            
                              <td style="height:5vh; width:28vh;">@dyn743.TarefeTitle</td>
-                             <td style="height:5vh; width:28vh;">@dyn743.TarefeId</td>
+                                     <td style="height:5vh; width:28vh;">@dyn743.TarefeId</td>
                              <td style="height:5vh; width:28vh;">@dyn743.TarefePrice</td>
                          @*  <td style="height:5vh; width:28vh;">@dyn743.StartTime_F23</td>
                              <td style="height:5vh; width:28vh;">@dyn743.EndTime_F25</td>
@@ -96,24 +74,36 @@
         <style>
             .g-col-1 {
                 box-sizing: border-box;
-                
+                font-size: 0.7em;
                 width: 50%;
                 height: 141px;
-                background: #FFD600;
+                background: #FFFFFF;
                 border-radius: 17px;
-                margin:20px;
+                padding:10px;
+                margin:15px;
             }
 
             .g-col-2 {
                 box-sizing: border-box;
-                width: 30%;
+                
+                width: 40%;
                 height: 141px;
-                background: #FFffff;
+                background: #Ffffff;
                 border-radius: 17px;
-                margin: 20px;
+                margin-top:15px;
+
+                margin-right:5vh;
             }
 
-            
+            .gymlogo{
+               
+                height:10em; 
+                width:10em;
+                position:relative;
+                right: 140px;
+                top: -50px;
+
+            }
 
 
         </style>
@@ -131,7 +121,7 @@
         
         
 
-                <button type="button" class="btn btn-info btn-md" id="myBtn3">Modal with backdrop:"static"</button>
+                <button style=" border: 2px solid ; border-radius: 17px; height:50px; width:850px; margin-right:120px;" type="button" class="btn btn-info btn-md" id="myBtn3">پرداخت</button>
 
         
         <!-- Modal -->
