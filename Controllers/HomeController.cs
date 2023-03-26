@@ -138,6 +138,19 @@ namespace gym.Controllers
 
             return Ok();
 
+        } 
+        public IActionResult DeSelectBtn()
+        {
+
+            //Int64 id = model.TarefeId;
+
+            Int64 id = Convert.ToInt64(Request.Form["BtnId"].ToString());
+            //TarefeModel mm = mymodel.tarefeList;
+
+            unFlagBtn(id);
+
+            return Ok();
+
         }
 
         public IActionResult ClearAllBtn()
@@ -161,6 +174,19 @@ namespace gym.Controllers
                 }
 
             }
+        }
+
+        public void unFlagBtn(Int64 id)
+        {
+
+            foreach (var model in mymodel.tarefeList)
+            {
+                if (model.TarefeId == id)
+                {
+                    model.Selected = false;
+                }
+
+            }
 
         }
 
@@ -171,7 +197,7 @@ namespace gym.Controllers
                 model.Selected = false;
 
             }
-        }
+        } 
 
         public void CRUD()
         {

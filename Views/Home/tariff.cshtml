@@ -18,7 +18,7 @@
 
 
 
-<div style="background-color:#ffff;border-radius: 17px; border: 1px solid #130085; height:100%; width:100%; padding:2% 3% 2% 3%;">
+<div style="background: linear-gradient(180deg, #B4C1D0 0%, rgba(178, 190, 204, 0) 100%);border-radius: 17px; border: 1px solid #130085; height:100%; width:100%; padding:2% 3% 2% 3%;">
 
     <header class=" row w-100 p-4 text-sm-right" style=" background-color:white;border-radius: 17px; margin-right:3px;border: 1px solid #130085; ">
     
@@ -30,13 +30,14 @@
 
     @{
         int i = 1;
+        int colorStep = 80;
         Int64 summ = 0;
 <body style="direction:rtl;text-align:justify; ">
 
         <style> 
-body { 
-/*    background-image: url("https://img.freepik.com/free-photo/blurred-cardio-machines_1203-98.jpg?w=900&t=st=1678951885~exp=1678952485~hmac=c7b11f64902a94d3bb32015e1a7fabe56c16fd96cb6b43e045974254996f96d3"); 
-*/     background-repeat:no-repeat; 
+body {
+     background-image: url("~/images/wave.png");
+     background-repeat:no-repeat; 
      background-size:cover; 
      background-opacity: 0.1;
 
@@ -52,11 +53,12 @@ body {
                 
                 if (dyn979.service_id != -1)
                 {
-                    i = i + 25;
+                    i = i + colorStep;
                
                             <div style=" border-radius: 17px;margin:5px;" class="row">
 
-                                        <div id="mainCAt" style="border-radius: 17px; font-size: 0.9em; height:100px; width:15vh;background-color:@(GetColorIndex(i)+"99");text-align:center; margin:5px; padding-top:3.5vh;">@dyn979.service_name
+                        <div id="mainCAt" style="color:white;border-radius: 1px; font-size: 2vh; height:11vh; width:15vh;background-color:@(GetColorIndex(i)+"99");text-align:center; margin:4.5vh 0px 0px 0px; padding-top:3.5vh;">
+                            @dyn979.service_name
                                 
                             </div>
 
@@ -69,15 +71,15 @@ body {
 
                                     @if (dyn743.Selected == true)
                                     {
-                                        <button class="btn" id=@dyn743.TarefeId onclick="" style=" border-radius: 17px;background:repeating-linear-gradient(45deg, rgb(250, 252, 255)0, rgba(211, 211, 211, 1) 1px);  margin:5px; height:100px; width:15vh; text-align:center;   border: 3px dashed @(GetColorIndex(i)+"30");;">
+                                        <button class="btn" id=@dyn743.TarefeId onclick="" value = "0" style=" border-radius: 1px; background:linear-gradient(-90deg, #B1B5B9 0%, rgba(178, 190, 204, 0) 100%); height:13.5vh; width:15vh; text-align:center; margin-top:2vh; ">
                                             
-                                
+
                                         </button>
                                     }else{
-                                        <button class="btn" id=@dyn743.TarefeId onclick="" value=@i style=" border-radius: 17px;background-color:@(GetColorIndex(i)+"10"); margin:5px;  height:100px; width:15vh; text-align:center; border-right: 8px solid @(GetColorIndex(i)+"40");">
-                                            <div style="font-size: 0.7em" >@dyn743.TarefeTitle</div>
-                                            
-                                            <div style="font-size: 0.7em" >@dyn743.TarefePrice</div>
+                                        <button class="btn" id=@dyn743.TarefeId onclick="" value=@i style=" border-radius: 1px;background: linear-gradient(90deg,#FFFFFF 0%, rgba(219, 214, 214, 0.64)  100%);  height:13.5vh; width:15vh; text-align:center;margin-top:2vh;border-right:0px;border-left:0px;border-bottom:0px;  border-top: 2.5vh solid; border-image:  linear-gradient(to right, @(GetColorIndex(i)+"50"),@(GetColorIndex(i)+"99")) 1;">
+                                            <div style="color:white; font-size: 1.5vh;margin-top:-6.5vh;margin-right:2vh;position:absolute;">@dyn743.TarefeTitle</div>
+
+                                            <div id="CurrencyFormat" style="font-size: 1.5vh;">@dyn743.TarefePrice</div>
                                 
                                         </button>
                                     }
@@ -101,16 +103,19 @@ body {
           
             <hr />
             <br />
-       
 
             @foreach (var dyn743 in Model.tarefeList)
             {
 
                 if (dyn743.Selected == true)
                 {
+                    <button class="btn" id=@dyn743.TarefeId value="selected" onclick="" style="margin-left:-0.5vh; border-radius: 1px;background: linear-gradient(90deg,#FFFFFF 0%, rgba(219, 214, 214, 0.64)  100%);  height:13.5vh; width:15vh; text-align:center;border-right:0px;border-left:0px;border-bottom:0px;  border-top: 2.5vh solid; border-image:  linear-gradient(to right, @(GetColorIndex(dyn743.Color)+"50"),@(GetColorIndex(dyn743.Color)+"99")) 1;">
+                        <div style="color:white; font-size: 1.5vh;margin-top:-6.5vh;margin-right:2vh;position:absolute;">@dyn743.TarefeTitle</div>
 
+                        <div id="CurrencyFormat" style="font-size: 1.5vh;">@dyn743.TarefePrice</div>
+                        
+                    </button>
 
-                    <button class="btn" onclick="" style="vertical-align:middle; border-right: 8px solid @(GetColorIndex(dyn743.Color)+"40"); border-radius: 17px;background-color:white; margin:5px;  height:100px; width:15vh; text-align:center;  font-size: 0.7em" id="Selected" > @dyn743.TarefeTitle <br /> @dyn743.TarefePrice </button>
 
                     summ = summ + dyn743.TarefePrice;
 
@@ -132,32 +137,41 @@ body {
 
         <footer class="row align-items-center" style="height:7vh ;margin-bottom:-1.5vh;">
 
-         <div style=" width:20%;height:100%;border-radius: 17px; margin-left:5%;margin-right:10%;">
+            <div class="row" style=" width:20%;height:100%;border-radius: 17px;border: 1px solid red; margin-left:5%;margin-right:10%;">
            
 
                         <form method="post" asp-controller="home" asp-action="bill" method="post">
                             @*</input><td>@Html.ActionLink("Home", "SendToFactor", new { TarefeId = 1 })</td>*@
 
-                    <input style="background-color:#ffff;border-radius: 17px; border: 1px solid #159300;width:100%;height:7vh;" type="submit" name="test" value="تایید" id="save">
+                             <input style="background-color:#ffff;border-radius: 17px; border: 1px solid #159300;width:100%;height:7vh;" type="submit" name="test" value="تایید" id="save">
+                    
+                                @*<img style=" height:2.5em; width:2.5em;" src="@Url.Content("~/images/banknote.png")" />*@
+                           
+
+                        </form><form method="post" asp-controller="home" asp-action="bill" method="post">
+                            @*</input><td>@Html.ActionLink("Home", "SendToFactor", new { TarefeId = 1 })</td>*@
+
+                             <input style="background-color:#ffff;border-radius: 17px; border: 1px solid #159300;width:100%;height:7vh;" type="submit" name="test" value="تایید" id="save">
+                    
                                 @*<img style=" height:2.5em; width:2.5em;" src="@Url.Content("~/images/banknote.png")" />*@
                            
 
                         </form>
             
         </div>
-            <div style="width:20%;height:100%;border-radius: 17px; margin-left:5%;margin-right:5%;">
+        <div style="width:20%;height:100%;border-radius: 17px; margin-left:5%;margin-right:5%;">
 
                 <form method="post" asp-controller="home" asp-action="bill" method="post">
                     @*</input><td>@Html.ActionLink("Home", "SendToFactor", new { TarefeId = 1 })</td>*@
 
-                    <input style="background-color:#FFFE;border-radius: 17px; border: 1px solid #130085; width:100%;height:7vh;" type="submit" name="test" value="@summ" id="save" onkeyup="javascript: this.value = ToRial(this.value);" />
+                    <div style="background-color:#FFFE;border-radius: 17px; border: 1px solid #130085; width:100%;height:7vh;" type="submit" name="test" value="@summ" id="CurrencyFormat">@summ</div>
                     @*<img style=" height:2.5em; width:2.5em;" src="@Url.Content("~/images/banknote.png")" />*@
 
 
                 </form>
            
         </div>
-            <div style="  border-radius: 17px;width:20%;height:100%; margin-left:4%;margin-right:5%;">
+        <div style="  border-radius: 17px;width:20%;height:100%; margin-left:4%;margin-right:5%;">
             
                         <form method="post" asp-controller="home" asp-action="ClearAllBtn" method="post">
                     <input style=" background-color:#FFFE;border-radius: 17px; border: 1px solid #CA0000;width:100%;height:7vh;" type="submit" name="test" value="حذف همه" id="deleteAll">
@@ -177,6 +191,11 @@ body {
     public string GetColorIndex(int index)
     {
         int n = 255;
+
+        for (; index > n; index -= n)
+            ;
+
+
         string R = "FF";
         string G = "FF";
         string B = "FF";
@@ -255,17 +274,33 @@ body {
 
 
 
-                    if (this.id != "Selected") {
+            if (this.value != "selected" & this.value != "0") {
                       
+                        if(this.value != "0"){
 
+                        
+                            $.ajax({
+
+                                type: "POST", //HTTP POST Method
+                                url: "SelectBtn", // Controller/method
+                                data: { //Passing data
+                                BtnId: (this).id, //$("#txtName").val() //Reading text box values using Jquery
+                                ColIndex: this.value
+                               
+
+                                }, success: function (data) { location.reload(); }
+                            });
+                        }
+
+                    } else if (this.value == "selected") {
                         $.ajax({
 
                             type: "POST", //HTTP POST Method
-                            url: "SelectBtn", // Controller/method
+                            url: "DeSelectBtn", // Controller/method
                             data: { //Passing data
-                            BtnId: (this).id, //$("#txtName").val() //Reading text box values using Jquery
-                            ColIndex: this.value
-                               
+                                BtnId: (this).id, //$("#txtName").val() //Reading text box values using Jquery
+
+
 
                             }, success: function (data) { location.reload(); }
                         });
@@ -274,49 +309,41 @@ body {
                     }
 
                     //MakeBtn((this).id, (this).value);
+            /*repeating-linear-gradient(45deg, rgb(250, 252, 255)0, rgba(211, 211, 211, 1) 1px)*/
+
 
                 });
 
-                Calculate();
+        CurrencyFormat();
 
             });
 
 
 
-            function Calculate() {
+
+    function CurrencyFormat() {
 
 
 
-                var totalPrice = 0;
 
-                $("#total").text("0");
+        $("div").each(function (id, textContent) {
 
-                $("button").each(function (index, value) {
-                    console.log(`div${index}: ${(this.id).substring(0, 1)} : ${this.value}`);
-                    if ((this.id) == "Selected") {
+            if (this.id == "CurrencyFormat") {
 
-                        
+                money = this.textContent;
 
-                        totalPrice = totalPrice + parseFloat(this.value);
-                       
 
-                        $("#total").text(totalPrice);
+                nfObject = new Intl.NumberFormat('en-US');
+                output = nfObject.format(money);
 
-                    }
-                });
+                console.log(`div${this.id}: currency : ${output}`);
+
+                this.textContent = output;
 
             }
 
-    function ToRial(str) {
 
-        str = str.replace(/\,/g, '');
-        var objRegex = new RegExp('(-?[0-9]+)([0-9]{3})');
+        });
 
-        while (objRegex.test(str)) {
-            str = str.replace(objRegex, '$1,$2');
-        }
-
-        return str;
     }
-
 </script>
