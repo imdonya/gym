@@ -22,6 +22,7 @@ namespace gym.Controllers
 
         private readonly ILogger<HomeController> _logger;
         public static List<TarefeModel> tarefeModel = new List<TarefeModel>();
+        public static List<ServiceModel> serviceModel = new List<ServiceModel>();
         public static Int64 persenId;
         public static PersonModel personInfo;
         public static FactorModel factorModel;
@@ -42,12 +43,12 @@ namespace gym.Controllers
             DateTime.Now.ToString("yyyy/mm/dd HH:mm");
             
             tarefeModel = TarefeModel.GetList();
+            serviceModel = ServiceModel.GetList();
             personInfo = PersonModel.GetInfo(persenId);
             
-
-
-
             mymodel.tarefeList = tarefeModel;
+            //mymodel.tarefeJalaseh = null;
+            //mymodel.serviceList = serviceModel;
             mymodel.personInfo = personInfo;
 
             
@@ -72,6 +73,15 @@ namespace gym.Controllers
 
             //mymodel = new ExpandoObject();
             
+
+            return View(mymodel);
+
+        }
+        public IActionResult ServiceReg()
+        {
+
+            //mymodel = new ExpandoObject();
+
 
             return View(mymodel);
 
@@ -187,6 +197,16 @@ namespace gym.Controllers
                 }
 
             }
+
+        }
+
+        public void GetTarefeJalaseh()
+        {
+            Int64 tarefeid = Convert.ToInt64(Request.Form["tarefeId"].ToString());
+
+            //TarefeModel mm = mymodel.tarefeList;
+
+            mymodel.tarefeJalaseh = TarefeModel.GetListJalasat(tarefeid);
 
         }
 

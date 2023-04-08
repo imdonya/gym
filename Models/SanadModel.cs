@@ -16,8 +16,8 @@ namespace gym.Models
     public class SanadModel
     {
 
-
-        static string ConUrl = "server=DESKTOP-CE0SVTO\\PVSSQL2012; database=nid_Develop3.14; integrated security=true;";
+        
+        static string ConUrl = "server=DESKTOP-CE0SVTO\\PVSSQL2012; database=nid_Develop3.14;User ID = sa; Password=p@y@vist@123;";
         //static string ConUrl = "server=.\\ELCAMSQLSERVER; database=nid_Develop3.14; integrated security=true;";
         public Int64  F1_KolHesabdari { get; set; }
         public Int64 F2_MoeenHesabdari { get; set; }

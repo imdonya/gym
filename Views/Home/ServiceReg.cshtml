@@ -1,0 +1,215 @@
+﻿@{
+    ViewData["Title"] = "ثبت خدمت";
+}
+
+
+@model dynamic
+
+@section NavItem
+{
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="ServiceReg"></a>
+    
+    </li>
+}
+
+<form style=" direction:rtl; text-align:right ; ">
+
+
+    <div class="flex-xl-row" >
+        <div>
+            <p>تعداد جلسه :</p>
+
+            
+
+                @foreach (var service in Model.serviceModel)
+                {
+                    @if (service.NoTaradod == false)
+                    {
+                        <select name="Jalast" id="Jalasat">
+
+                            @foreach (var jalasat in Model.TarefeModels)
+                            {
+                                <option value=@jalasat.jalaseCount_F28></option>
+                            }
+
+                        </select>
+                    }
+                }
+            
+
+
+        </div>
+        <div>
+            <input>
+        </div>
+
+    </div>
+    <hr />
+
+    <div>
+        <div>
+            <p>بوفه :</p>
+        </div>
+    </div>
+    <hr />
+
+    <div>
+        <div>
+            <p>برنامه غذایی :</p>
+        </div>
+        <div>
+            <p>برنامه تمرینی :</p>
+        </div>
+
+    </div>
+    <hr />
+
+    <div>
+        <div>
+            <p>مربی خصوصی :</p>
+        </div>
+
+    </div>
+    <hr />
+
+    <div>
+        <div>
+            <p>رختکن VIP :</p>
+        </div>
+    </div>
+    <hr />
+    
+    <div>
+        <div>
+            <p>ماساژ :</p>
+        </div>
+    </div>
+    <hr />
+
+@*
+        @foreach (var service in Model.tarefeList)
+            {
+                @if (service.ShowInUI == true)
+                {
+
+                    <br />
+                    <hr />
+                    <br />
+                    <label> @service.ServiceTitle : </label>
+
+                    <select name="@service.ServiceId" id=@service.ServiceId>
+
+                        <option value=Null></option>
+
+                        @foreach (var tarefe in Model.tarefeList)
+                        {
+                            @if (service.ServiceId == tarefe.khedmatId & service.ShowInUI == true)
+                            {
+
+                                <option value="@tarefe.TarefeId-@tarefe.TarefePrice">@tarefe.TarefeTitle</option>
+                            }
+                        }
+                    
+                    </select>
+                }
+            }*@
+        
+
+        <br />
+        <br />
+        <div class="row">
+            <h6>جمع شهریه :  </h6>
+            <h6 id="Total">0</h6>
+        </div>
+        
+
+</form>
+
+
+
+
+
+  
+@*****************************************jQuery *****************************************@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+
+    $(document).ready(function () 
+    {
+        $("select").click(function () {
+            ;
+
+            console.log(" value :" + (this.value) + "- id:" + (this.value).slice(0, 19) + "- price:" + (this.value).slice(20, (this.value).length));
+
+
+          
+
+            Calculate();
+        });
+
+                
+    });
+
+
+
+
+    function CurrencyFormat() {
+
+
+
+
+        $("div").each(function (id, textContent) {
+
+            if (this.id == "CurrencyFormat") {
+
+                money = this.textContent;
+
+
+                nfObject = new Intl.NumberFormat('en-US');
+                output = nfObject.format(money);
+
+                console.log(`div${this.id}: currency : ${output}`);
+
+                this.textContent = output;
+
+            }
+
+
+        });
+
+
+
+
+    }
+
+    function Calculate() {
+
+
+
+            var totalPrice = 0;
+
+            
+            console.log("---------------------");
+
+            $("#Total").text("0");
+
+            $("select").each(function (index, value) {
+
+                if ((this.value) != "Null") {
+
+                    console.log(":: price:" + (this.value).slice(20, (this.value).length));
+
+                    totalPrice = totalPrice + parseFloat((this.value).slice(20, (this.value).length));
+
+                    nfObject = new Intl.NumberFormat('en-US');
+                    output = nfObject.format(totalPrice);
+
+                    $("#Total").text(output);
+
+                }
+            });
+    }
+        
+
+</script>

@@ -7,22 +7,27 @@
 
 @section NavItem{
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="bill">فاکتور</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="home" asp-action="bill"></a>
     </li>
 }
 
+<header class=" justify-content-center" style=" background-color:white;border-radius: 17px;">
 
-
-<form style="padding:0px 10px 10px 10px; direction:rtl; text-align:center  background-color:#F6E5F4D6; ">
-    <header class=" row w-100 p-2 text-sm-right" style=" background-color:white;border-radius: 17px;">
-    
-    <input style="direction:rtl; border:none; block-size:none;" class="text-sm-centr" value="@{var person = Model.personInfo;@person.PersonName }"> 
-    <div class="text-lg-right"></div>
+    <p style="text-align:center; border:none; block-size:none;padding-top:2vh;" class="text-sm-centr">
+        @{
+            var person = Model.personInfo;
+            @person.PersonName
+        }
+    </p>
+    <hr />
 
 </header>
 
+<form style=" direction:rtl; text-align:center ;  ">
 
-    <body style="direction:rtl;text-align:justify; background-color:#E2E2E2;">
+
+
+    <body class="justify-content-center" style="direction:rtl;text-align:justify; background-color:#E2E2E2;">
 
         <div class="row  text-center">
             <div class="g-col-1 row">
@@ -37,7 +42,7 @@
                 <tr>
                    
                     <th style="height:5vh; width:28vh;" scope="col">نام تعرفه</th>
-                    <th style="height:5vh; width:28vh;" scope="col">تعداد</th>
+                    <th style="height:5vh; width:28vh;" scope="col">مربی</th>
                     <th style="height:5vh; width:28vh;" scope="col">قیمت</th>
                 </tr>
             </thead>
@@ -53,7 +58,7 @@
                          <tr>
                             
                              <td style="height:5vh; width:28vh;">@dyn743.TarefeTitle</td>
-                                     <td style="height:5vh; width:28vh;">@dyn743.TarefeId</td>
+                                     <td style="height:5vh; width:28vh;">---</td>
                              <td style="height:5vh; width:28vh;">@dyn743.TarefePrice</td>
                          @*  <td style="height:5vh; width:28vh;">@dyn743.StartTime_F23</td>
                              <td style="height:5vh; width:28vh;">@dyn743.EndTime_F25</td>
@@ -109,19 +114,17 @@
         </style>
     </body>
 
-    <footer>
-    </footer>
 
-        
 
-</form>
+
+
 
 
      
         
         
 
-                <button style=" border: 2px solid ; border-radius: 17px; height:50px; width:850px; margin-right:120px;" type="button" class="btn btn-info btn-md" id="myBtn3">پرداخت</button>
+              <button style=" border: 2px solid ; border-radius: 17px; height:50px; width:850px;" type="button" class="btn btn-info btn-md" id="myBtn3">پرداخت</button>
 
         
         <!-- Modal -->
@@ -153,6 +156,10 @@
 
             </div>
         </div>
+
+</form>
+<footer>
+</footer>
 
 
 

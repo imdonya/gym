@@ -38,7 +38,7 @@ namespace gym.Models
 
         public ErrorViewModel er { get; set; }
 
-        static string ConUrl = "server=DESKTOP-CE0SVTO\\PVSSQL2012; database=nid_Develop3.14; integrated security=true;";
+        static string ConUrl = "server=.\\PVSSQL2012; database=nid_Develop3.14;User ID = sa; Password=p@y@vist@123;";
         //static string ConUrl = "server=.\\ELCAMSQLSERVER; database=nid_Develop3.14; integrated security=true;";
 
         public static List<TarefeModel> GetList()
@@ -80,27 +80,59 @@ namespace gym.Models
 
             }
             dr.Close();
-            command = new SqlCommand("Select * from dyn_979", con);
-            Console.WriteLine("cm:" + command);
-            SqlDataReader dr1 = command.ExecuteReader();
 
-
-            while (dr1.Read())
-            {
-                MyList.Add(new TarefeModel
-                {
-                    service_id = Convert.ToInt64(dr1["Id"]),
-                    service_name = dr1["F1"].ToString()
-                });
-
-            }
-
-            dr1.Close();
             con.Close();
 
             return MyList;
 
         }
+
+
+        public static List<TarefeModel> GetListJalasat(Int64 tarefeid)
+        {
+
+            SqlConnection con = new SqlConnection(ConUrl);
+            con.Open();
+
+
+            SqlCommand command = new SqlCommand("Select * from dyn_743_1 WHERE F91 = "+tarefeid, con);
+            Console.WriteLine("cm:" + command);
+            SqlDataReader dr = command.ExecuteReader();
+            List<TarefeModel> MyList = new List<TarefeModel>();
+
+            while (dr.Read())
+            {
+                MyList.Add(new TarefeModel
+                {
+
+                    //TarefeId = Convert.ToInt64(dr["Id"]),
+                    TarefePrice = Convert.ToInt64(dr["F40"]),
+                    //khedmatId = dr["F66"].ToString() != string.Empty ? Convert.ToInt64(dr["F66"]) : 0,
+                    //service_name = dr["F51"].ToString(),
+                    //TarefeTitle = dr["F35"].ToString(),
+
+                    durationUnit_F30 = Convert.ToInt32(dr["F30"]),
+                    durationCount_F24 = Convert.ToInt32(dr["F24"]),
+                    jalaseCount_F28 = Convert.ToInt32(dr["F28"]),
+
+                    //tarefeCode = dr["F87"].ToString(),
+                    //EndTime_F25 = Convert.ToDateTime(dr["F25"]),
+                    //Zaman_F88 = Convert.ToDateTime(dr["F88"]),
+                    //morabiName_F53 = dr["F53"].ToString(),
+
+
+                });
+
+            }
+            dr.Close();
+
+            con.Close();
+
+            return MyList;
+
+        }
+
+
 
         public static TarefeModel Select()
         {

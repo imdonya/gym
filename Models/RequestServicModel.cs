@@ -11,7 +11,7 @@ namespace gym.Models
     {
 
         //************************************خدمات درخواستی******************************
-        static string ConUrl = "server=DESKTOP-CE0SVTO\\PVSSQL2012; database=nid_Develop3.14; integrated security=true;";
+        static string ConUrl = "server=DESKTOP-CE0SVTO\\PVSSQL2012; database=nid_Develop3.14; User ID = sa; Password=p@y@vist@123;";
         //static string ConUrl = "server=.\\ELCAMSQLSERVER; database=nid_Develop3.14; integrated security=true;";
 
         public Int64 gheymat_f5 { get; set; }

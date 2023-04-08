@@ -8,7 +8,7 @@
 @section NavItem
 {
     <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="tariff">تعرفه</a>
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="tariff"></a>
     
     </li>
 }
@@ -18,15 +18,16 @@
 
 
 
-<div style="background: linear-gradient(180deg, #B4C1D0 0%, rgba(178, 190, 204, 0) 100%);border-radius: 17px; border: 1px solid #130085; height:100%; width:100%; padding:2% 3% 2% 3%;">
+<div style="direction:rtl;background: linear-gradient(180deg, #B4C1D0 0%, rgba(178, 190, 204, 0) 100%);  height:100%; width:100%;">
 
-    <header class=" row w-100 p-4 text-sm-right" style=" background-color:white;border-radius: 17px; margin-right:3px;border: 1px solid #130085; ">
-    
-    <input style="direction:rtl; border:none; block-size:none;" class="text-sm-centr" value="@{var person = Model.personInfo;@person.PersonName }"> 
-    <div class="text-lg-right">، به باشگاه خوش اومدی!<img style=" height:1em; width:1em;" src="@Url.Content("~/images/wave.png")" /></div>
 
-</header>
-
+    <p style="text-align:center; border:none; block-size:none;padding-top:2vh;" class="text-sm-centr">
+        @{
+            var person = Model.personInfo;
+            @person.PersonName
+        }
+    </p>
+    <hr />
 
     @{
         int i = 1;
@@ -36,6 +37,7 @@
 
         <style> 
 body {
+     font-family: B Roya, Helvetica, sans-serif;
      background-image: url("~/images/wave.png");
      background-repeat:no-repeat; 
      background-size:cover; 
@@ -57,7 +59,7 @@ body {
                
                             <div style=" border-radius: 17px;margin:5px;" class="row">
 
-                        <div id="mainCAt" style="color:white;border-radius: 1px; font-size: 2vh; height:11vh; width:15vh;background-color:@(GetColorIndex(i)+"99");text-align:center; margin:4.5vh 0px 0px 0px; padding-top:3.5vh;">
+                            <div id="mainCAt" style="color:white;border-radius: 1px; font-size: 2vh; height:11vh; width:15vh;background-color:@(GetColorIndex(i)+"99");text-align:center; margin:4.5vh 0px 0px 0px; padding-top:3.5vh;">
                             @dyn979.service_name
                                 
                             </div>
@@ -77,9 +79,14 @@ body {
                                         </button>
                                     }else{
                                         <button class="btn" id=@dyn743.TarefeId onclick="" value=@i style=" border-radius: 1px;background: linear-gradient(90deg,#FFFFFF 0%, rgba(219, 214, 214, 0.64)  100%);  height:13.5vh; width:15vh; text-align:center;margin-top:2vh;border-right:0px;border-left:0px;border-bottom:0px;  border-top: 2.5vh solid; border-image:  linear-gradient(to right, @(GetColorIndex(i)+"50"),@(GetColorIndex(i)+"99")) 1;">
-                                            <div style="color:white; font-size: 1.5vh;margin-top:-6.5vh;margin-right:2vh;position:absolute;">@dyn743.TarefeTitle</div>
+                                            <div style="color:white; font-size: 1.25vh;margin-top:-2.5vh;margin-right:4vh;position:absolute; text-align:justify-all;">@dyn743.TarefeTitle</div>
 
-                                            <div id="CurrencyFormat" style="font-size: 1.5vh;">@dyn743.TarefePrice</div>
+                                            <div style="font-size: 1vh; text-align:right; color:@(GetColorIndex(i)+"99");">مبلغ: </div>
+                                            <div id="CurrencyFormat" style="font-size: 1.25vh;">@dyn743.TarefePrice</div>
+                                            <div style="font-size: 1vh;text-align:right; color:@(GetColorIndex(i)+"99");">مربی: </div>
+                                            <div  style="font-size: 1.25vh;">---</div>
+                                            <div style="font-size: 1vh;text-align:right; color:@(GetColorIndex(i)+"99");">زمانبندی: </div>
+                                            <div  style="font-size: 1.25vh;">آزاد</div>
                                 
                                         </button>
                                     }
@@ -135,52 +142,42 @@ body {
     <br/>
     <br/>
 
-        <footer class="row align-items-center" style="height:7vh ;margin-bottom:-1.5vh;">
+        <footer class="d-flex justify-content-center" style="">
+            <div class="d-flex justify-content-center" style="">
+            <form style="" method="post" asp-controller="home" asp-action="bill" method="post">
+                <div class="row" style=" ">
 
-            <div class="row" style=" width:20%;height:100%;border-radius: 17px;border: 1px solid red; margin-left:5%;margin-right:10%;">
-           
-
-                        <form method="post" asp-controller="home" asp-action="bill" method="post">
-                            @*</input><td>@Html.ActionLink("Home", "SendToFactor", new { TarefeId = 1 })</td>*@
-
-                             <input style="background-color:#ffff;border-radius: 17px; border: 1px solid #159300;width:100%;height:7vh;" type="submit" name="test" value="تایید" id="save">
-                    
-                                @*<img style=" height:2.5em; width:2.5em;" src="@Url.Content("~/images/banknote.png")" />*@
-                           
-
-                        </form><form method="post" asp-controller="home" asp-action="bill" method="post">
-                            @*</input><td>@Html.ActionLink("Home", "SendToFactor", new { TarefeId = 1 })</td>*@
-
-                             <input style="background-color:#ffff;border-radius: 17px; border: 1px solid #159300;width:100%;height:7vh;" type="submit" name="test" value="تایید" id="save">
-                    
-                                @*<img style=" height:2.5em; width:2.5em;" src="@Url.Content("~/images/banknote.png")" />*@
-                           
-
-                        </form>
+                
+                        <input style="background-color:#ffff;border-radius:0px 17px 17px 0px; border: 1px solid #159300;width:15vh;height:5vh;" type="submit" name="test" value="تایید" id="save">
+                    <div style="background-color:#159300;padding-top:0.5vh; "><img style=" height:1.5em; width:1.5em;" src="@Url.Content("~/images/tick-mark.png")" /></div>
             
-        </div>
-        <div style="width:20%;height:100%;border-radius: 17px; margin-left:5%;margin-right:5%;">
-
-                <form method="post" asp-controller="home" asp-action="bill" method="post">
-                    @*</input><td>@Html.ActionLink("Home", "SendToFactor", new { TarefeId = 1 })</td>*@
-
-                    <div style="background-color:#FFFE;border-radius: 17px; border: 1px solid #130085; width:100%;height:7vh;" type="submit" name="test" value="@summ" id="CurrencyFormat">@summ</div>
-                    @*<img style=" height:2.5em; width:2.5em;" src="@Url.Content("~/images/banknote.png")" />*@
-
-
-                </form>
-           
-        </div>
-        <div style="  border-radius: 17px;width:20%;height:100%; margin-left:4%;margin-right:5%;">
+                           
+  
             
-                        <form method="post" asp-controller="home" asp-action="ClearAllBtn" method="post">
-                    <input style=" background-color:#FFFE;border-radius: 17px; border: 1px solid #CA0000;width:100%;height:7vh;" type="submit" name="test" value="حذف همه" id="deleteAll">
-                        </form>
+                </div>
+            </form>
+            <form style="" method="post" asp-controller="home" asp-action="bill" method="post">
+            <div style="border-radius: 17px; margin:0vh 2vh 2vh 2vh;">
+
+
+                    <div style="width:19vh;height:5vh; text-align:center;" type="submit" name="test" value="@summ" id="CurrencyFormat">@summ
+                       
+                    </div>
+                   
+            </div>
+            </form>
+            <form style="" method="post" asp-controller="home" asp-action="ClearAllBtn" method="post">
+                <div class="row" style="  border-radius: 17px; ">
+
+
+                    <div style="background-color:#CA0000;padding-top:0.5vh;"><img style=" height:1.5em; width:1.5em;" src="@Url.Content("~/images/cross.png")" /></div>
+                    <input style=" background-color:#ffff;border-radius:17px 0px 0px 17px; border: 1px solid #CA0000;width:15vh;height:5vh;" type="submit" name="test" value="انصراف" id="deleteAll">
+                       
            
-        </div>
+                    </div>
+            </form>
 
-
-       
+            </div>
         
     </footer>
     }

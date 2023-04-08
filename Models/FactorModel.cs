@@ -33,7 +33,7 @@ namespace gym.Models
         public BinderType F48 { get; set; }
         public ErrorViewModel er { get; set; }
 
-        static string ConUrl = "server=DESKTOP-CE0SVTO\\PVSSQL2012; database=nid_Develop3.14; integrated security=true;";
+        static string ConUrl = "server=DESKTOP-CE0SVTO\\PVSSQL2012; database=nid_Develop3.14;User ID = sa; Password=p@y@vist@123;";
         //static string ConUrl = "server=.\\ELCAMSQLSERVER; database=nid_Develop3.14; integrated security=true;";
 
 
